@@ -1,7 +1,23 @@
 import logo from './logo.svg';
 import './App.css';
+import React, {useEffect, useState} from 'react';
 
 function App() {
+  const [users, setUsers] = useState([])
+  const [expenses, setExpenses] = useState([])
+
+  useEffect(() => {
+    fetch('http:/localhost:9292/expenses')
+    .then((res) => res.json())
+    .then((data) => setExpenses(data))
+  }, [])
+
+  useEffect(() => {
+    fetch('http:/localhost:9292/users')
+    .then((res) => res.json())
+    .then((data) => setUsers(data))
+  }, [])
+  
   return (
     <div className="App">
       <header className="App-header">
