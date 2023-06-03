@@ -6,6 +6,7 @@ import CreateExpenseFrom from './CreateExpenseForm'
 import CreateUserForm from './CreateUserForm'
 import NavBar from './NavBar'
 import Header from './Header'
+import LoginForm from './LoginForm'
 
 function App() {
   const [users, setUsers] = useState([])
@@ -33,6 +34,9 @@ function App() {
           </Route>
           <Route path='/create-user-form'>
             <CreateUserForm users={users} />
+          </Route>
+          <Route path='/login-form'>
+            <LoginForm />
           </Route>
         </Switch>
     </div>
