@@ -1,6 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {useEffect, useState} from 'react';
+import CreateExpenseFrom from './CreateExpenseForm'
+import CreateUserForm from './CreateUserForm'
+import NavBar from './NavBar'
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   const [users, setUsers] = useState([])
@@ -17,23 +21,17 @@ function App() {
     .then((res) => res.json())
     .then((data) => setUsers(data))
   }, [])
-  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <Route path='/create_expense_form'>
+          <CreateExpenseFrom expenses={expenses} />
+        </Route>
+        <Route path='/create_user_form'>
+          <CreateUserForm users={users} />
+        </Route>
+      </Switch>
     </div>
   );
 }
