@@ -1,11 +1,11 @@
 import React from 'react';
 
-function CreateExpenseForm(){
+function Header(){
     return (
         <div>
-
+            <h1>Financease</h1>
         </div>
     )
 }
 
-export default CreateExpenseForm;
+export default Header;

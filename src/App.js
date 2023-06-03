@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import React, {useEffect, useState} from 'react';
+import { Route, Switch } from 'react-router-dom';
 import CreateExpenseFrom from './CreateExpenseForm'
 import CreateUserForm from './CreateUserForm'
 import NavBar from './NavBar'
-import { Route, Switch } from 'react-router-dom';
+import Header from './Header'
 
 function App() {
   const [users, setUsers] = useState([])
@@ -24,14 +25,16 @@ function App() {
 
   return (
     <div className="App">
-      <Switch>
-        <Route path='/create_expense_form'>
-          <CreateExpenseFrom expenses={expenses} />
-        </Route>
-        <Route path='/create_user_form'>
-          <CreateUserForm users={users} />
-        </Route>
-      </Switch>
+      <NavBar />
+      <Header />
+        <Switch>
+          <Route path='/create-expense-form'>
+            <CreateExpenseFrom expenses={expenses} />
+          </Route>
+          <Route path='/create-user-form'>
+            <CreateUserForm users={users} />
+          </Route>
+        </Switch>
     </div>
   );
 }
