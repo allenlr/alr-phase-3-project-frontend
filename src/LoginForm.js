@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-function LoginForm({onSubmitLoginForm}){
+function LoginForm({ onSubmitLoginForm, setCurrentUser }){
 
     const [userData, setUserData] = useState({
         username: '',
@@ -49,6 +49,9 @@ function LoginForm({onSubmitLoginForm}){
                         >
 
                         </input>
+                </p>
+                <p>
+                    <button type='submit'>Login</button>
                 </p>
             </form>
 

@@ -36,3 +36,27 @@
     transform: rotate(360deg);
   }
 }
+
+.input-table {
+  display:flex;
+  flex-direction: column;
+  border: 1px solid #000;
+  width: 30%;
+  margin: auto;
+}
+
+.input-row {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding:2px;
+  border-bottom: 1px solid #000;
+}
+
+.input-row:last-child {
+  border-bottom: none;
+}
+/* 
+.input-cell {
+  flex: 1;
+} */

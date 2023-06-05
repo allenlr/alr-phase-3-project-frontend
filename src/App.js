@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, {useEffect, useState} from 'react';
 import { Route, Switch } from 'react-router-dom';
@@ -11,6 +10,7 @@ import LoginForm from './LoginForm'
 function App() {
   const [users, setUsers] = useState([])
   const [expenses, setExpenses] = useState([])
+  const [currentUser, setCurrentUser] = useState([])
 
   useEffect(() => {
     fetch('http:/localhost:9292/expenses')
@@ -36,7 +36,7 @@ function App() {
             <CreateUserForm users={users} />
           </Route>
           <Route path='/login-form'>
-            <LoginForm />
+            <LoginForm setCurrentUser={setCurrentUser} />
           </Route>
         </Switch>
     </div>
