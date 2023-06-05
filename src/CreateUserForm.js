@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-function CreateUserForm(){
+function CreateUserForm({ onFormSubmit }){
     const [newUserData, setNewUserData] = useState({
         username: '',
         password: '',
@@ -18,10 +18,15 @@ function CreateUserForm(){
         })
     }
 
+    function onNewUserFormSubmit(e){
+        e.preventDefault();
+        onFormSubmit(newUserData)
+    }
+
     return (
         <div className="input-table">
             <h3>Enter New User Information</h3>
-            <form>
+            <form onSubmit={onNewUserFormSubmit}>
                 <p className="input-row">
                     <label>First Name: </label>
                     <input
@@ -55,7 +60,7 @@ function CreateUserForm(){
                 <p className="input-row">
                     <label>Password: </label>
                     <input
-                        type='text'
+                        type='password'
                         value={newUserData.password}
                         name='password'
                         onChange={handleNewUserFormChanges}

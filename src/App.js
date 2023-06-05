@@ -33,7 +33,7 @@ function App() {
       body: JSON.stringify(newUser)
     })
       .then((res) => res.json())
-      .then((addedUser) => setUsers([...users, addedUser]))
+      .then((addedUser) => console.log(addedUser))
   }
 
   console.log(users.length)
@@ -47,7 +47,7 @@ function App() {
             <CreateExpenseFrom expenses={expenses} />
           </Route>
           <Route path='/create-user-form'>
-            <CreateUserForm users={users} />
+            <CreateUserForm users={users} onFormSubmit={onSubmitCreateUserForm} />
           </Route>
           <Route path='/login-form'>
             <LoginForm setCurrentUser={setCurrentUser} />
