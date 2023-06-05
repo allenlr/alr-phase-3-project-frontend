@@ -36,7 +36,11 @@ function App() {
       .then((addedUser) => console.log(addedUser))
   }
 
-  console.log(users.length)
+  function onDeleteUser(deletedUserId){
+    fetch(`http://localhost:9292/users/${deletedUserId}`, {
+      method: 'DELETE'
+    })
+  }
 
   return (
     <div className="App">
