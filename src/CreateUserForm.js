@@ -23,7 +23,7 @@ function CreateUserForm(){
             <h3>Enter New User Information</h3>
             <form>
                 <p className="input-row">
-                    <lable>First Name: </lable>
+                    <label>First Name: </label>
                     <input
                         type='text'
                         value={newUserData.first_name}
