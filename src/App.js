@@ -13,13 +13,13 @@ function App() {
   const [currentUser, setCurrentUser] = useState([])
 
   useEffect(() => {
-    fetch('http:/localhost:9292/expenses')
+    fetch('http://localhost:9292/expenses')
     .then((res) => res.json())
     .then((data) => setExpenses(data))
   }, [])
 
   useEffect(() => {
-    fetch('http:/localhost:9292/users')
+    fetch('http://localhost:9292/users')
     .then((res) => res.json())
     .then((data) => setUsers(data))
   }, [])
