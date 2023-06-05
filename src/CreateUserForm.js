@@ -33,7 +33,7 @@ function CreateUserForm(){
                     </input>
                 </p>
                 <p className="input-row">
-                    <lable>Last Name: </lable>
+                    <label>Last Name: </label>
                     <input
                         type='text'
                         value={newUserData.last_name}
@@ -43,7 +43,7 @@ function CreateUserForm(){
                     </input>
                 </p>
                 <p className="input-row">
-                    <lable>Username: </lable>
+                    <label>Username: </label>
                     <input
                         type='text'
                         value={newUserData.username}
@@ -53,7 +53,7 @@ function CreateUserForm(){
                     </input>
                 </p>
                 <p className="input-row">
-                    <lable>Password: </lable>
+                    <label>Password: </label>
                     <input
                         type='text'
                         value={newUserData.password}
@@ -63,7 +63,7 @@ function CreateUserForm(){
                     </input>
                 </p>
                 <p className="input-row">
-                    <lable>Email: </lable>
+                    <label>Email: </label>
                     <input 
                         type='text'
                         value={newUserData.email}
@@ -73,7 +73,7 @@ function CreateUserForm(){
                     </input>
                 </p>
                 <p className="input-row">
-                    <lable>Set Monthly Budget: </lable>
+                    <label>Set Monthly Budget: </label>
                     <input
                         type='number'
                         step='0.01'

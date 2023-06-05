@@ -24,6 +24,20 @@ function App() {
     .then((data) => setUsers(data))
   }, [])
 
+  function onSubmitCreateUserForm(newUser){
+    fetch('http://localhost:9292/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser)
+    })
+      .then((res) => res.json())
+      .then((addedUser) => setUsers([...users, addedUser]))
+  }
+
+  console.log(users.length)
+
   return (
     <div className="App">
       <NavBar />
