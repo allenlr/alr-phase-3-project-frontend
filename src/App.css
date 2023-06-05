@@ -53,10 +53,4 @@
   border-bottom: 1px solid #000;
 }
 
-.input-row:last-child {
-  border-bottom: none;
-}
-/* 
-.input-cell {
-  flex: 1;
-} */
+

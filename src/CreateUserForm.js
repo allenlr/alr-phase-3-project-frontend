@@ -20,77 +20,74 @@ function CreateUserForm(){
 
     return (
         <div className="input-table">
-            <p className="input-row">
-                <lable className="input-cell">First Name: </lable>
-                <input
-                    className="input-cell" 
-                    type='text'
-                    value={newUserData.first_name}
-                    name='first_name'
-                    onChange={handleNewUserFormChanges}
-                    >
-                </input>
-            </p>
-            <p className="input-row">
-                <lable className="input-cell">Last Name: </lable>
-                <input
-                    className="input-cell" 
-                    type='text'
-                    value={newUserData.last_name}
-                    name='last_name'
-                    onChange={handleNewUserFormChanges}
-                    >
-                </input>
-            </p>
-            <p className="input-row">
-                <lable className="input-cell">Username: </lable>
-                <input
-                    className="input-cell" 
-                    type='text'
-                    value={newUserData.username}
-                    name='username'
-                    onChange={handleNewUserFormChanges}
-                    >
-                </input>
-            </p>
-            <p className="input-row">
-                <lable className="input-cell">Password: </lable>
-                <input
-                    className="input-cell" 
-                    type='text'
-                    value={newUserData.password}
-                    name='password'
-                    onChange={handleNewUserFormChanges}
-                    >
-                </input>
-            </p>
-            <p className="input-row">
-                <lable className="input-cell">Email: </lable>
-                <input
-                    className="input-cell" 
-                    type='text'
-                    value={newUserData.email}
-                    name='email'
-                    onChange={handleNewUserFormChanges}
-                    >
-                </input>
-            </p>
-            <p className="input-row">
-                <lable className="input-cell">Set Monthly Budget: </lable>
-                <input
-                    className="input-cell:last-child" 
-                    type='number'
-                    step='0.01'
-                    min='0'
-                    value={newUserData.monthly_budget}
-                    name='monthly_budget'
-                    onChange={handleNewUserFormChanges}
-                    >
-                </input>
-            </p>
-            <p>
-                <button type='submit'>Create User</button>
-            </p>
+            <h3>Enter New User Information</h3>
+            <form>
+                <p className="input-row">
+                    <lable>First Name: </lable>
+                    <input
+                        type='text'
+                        value={newUserData.first_name}
+                        name='first_name'
+                        onChange={handleNewUserFormChanges}
+                        >
+                    </input>
+                </p>
+                <p className="input-row">
+                    <lable>Last Name: </lable>
+                    <input
+                        type='text'
+                        value={newUserData.last_name}
+                        name='last_name'
+                        onChange={handleNewUserFormChanges}
+                        >
+                    </input>
+                </p>
+                <p className="input-row">
+                    <lable>Username: </lable>
+                    <input
+                        type='text'
+                        value={newUserData.username}
+                        name='username'
+                        onChange={handleNewUserFormChanges}
+                        >
+                    </input>
+                </p>
+                <p className="input-row">
+                    <lable>Password: </lable>
+                    <input
+                        type='text'
+                        value={newUserData.password}
+                        name='password'
+                        onChange={handleNewUserFormChanges}
+                        >
+                    </input>
+                </p>
+                <p className="input-row">
+                    <lable>Email: </lable>
+                    <input 
+                        type='text'
+                        value={newUserData.email}
+                        name='email'
+                        onChange={handleNewUserFormChanges}
+                        >
+                    </input>
+                </p>
+                <p className="input-row">
+                    <lable>Set Monthly Budget: </lable>
+                    <input
+                        type='number'
+                        step='0.01'
+                        min='0'
+                        value={newUserData.monthly_budget}
+                        name='monthly_budget'
+                        onChange={handleNewUserFormChanges}
+                        >
+                    </input>
+                </p>
+                <p>
+                    <button type='submit'>Create User</button>
+                </p>
+            </form>
         </div>
     )
 }
