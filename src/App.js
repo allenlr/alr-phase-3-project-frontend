@@ -24,6 +24,8 @@ function App() {
     .then((data) => setUsers(data))
   }, [])
 
+  
+  
   function onSubmitCreateUserForm(newUser){
     fetch('http://localhost:9292/users', {
       method: 'POST',
@@ -42,19 +44,21 @@ function App() {
     })
   }
 
+  console.log(currentUser)
+
   return (
     <div className="App">
-      <NavBar />
+      <NavBar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Header />
         <Switch>
           <Route path='/create-expense-form'>
             <CreateExpenseFrom expenses={expenses} />
           </Route>
           <Route path='/create-user-form'>
-            <CreateUserForm users={users} onFormSubmit={onSubmitCreateUserForm} />
+            <CreateUserForm users={users} onSubmitCreateUser={onSubmitCreateUserForm} />
           </Route>
           <Route path='/login-form'>
-            <LoginForm setCurrentUser={setCurrentUser} />
+            <LoginForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
           </Route>
         </Switch>
     </div>

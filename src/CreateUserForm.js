@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-function CreateUserForm({ onFormSubmit }){
+function CreateUserForm({ onSubmitCreateUser }){
     const [newUserData, setNewUserData] = useState({
         username: '',
         password: '',
@@ -20,7 +20,7 @@ function CreateUserForm({ onFormSubmit }){
 
     function onNewUserFormSubmit(e){
         e.preventDefault();
-        onFormSubmit(newUserData)
+        onSubmitCreateUser(newUserData)
     }
 
     return (

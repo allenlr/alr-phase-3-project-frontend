@@ -1,8 +1,15 @@
 import React from 'react';
 // eslint-disable-next-line
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 
-function NavBar(){
+function NavBar({ currentUser, setCurrentUser }){
+
+    const history = useHistory();
+    const handleLogout = () => {
+        setCurrentUser(null);
+        history.push('/login-form');
+    }
+
     return (
         <nav
             style={{
@@ -19,7 +26,15 @@ function NavBar(){
                 height: '20px',
             }}>
                 <NavLink exact to='/' style={{ marginRight: 'auto' }}>Home</NavLink>
-                <NavLink to='/login-form' style={{ marginRight:'1rem'}}>Login</NavLink>
+                {currentUser? 
+                    <NavLink onClick={handleLogout} exact to='/' style={{marginRight:'1rem'}}>
+                        Log Out
+                    </NavLink>
+                    :
+                    <NavLink to='/login-form' style={{marginRight:'1rem'}}>
+                        Log In
+                    </NavLink>}
+                {/* <NavLink to={!currentUser ? '/login-form' : '/'} style={{ marginRight:'1rem'}}>{!currentUser ? "Login" : "Log Out"}</NavLink> */}
                 <NavLink to='/create-user-form' style={{ position: 'right'}}>Create Account</NavLink>
                 
         </nav>

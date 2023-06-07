@@ -1,11 +1,16 @@
 import React, {useState} from 'react'
+import { useHistory } from 'react-router-dom';
 
-function LoginForm({ onSubmitLoginForm, setCurrentUser }){
-
+function LoginForm({ currentUser, setCurrentUser }){
+    const history = useHistory();
+    const [error, setError] = useState(null);
     const [userData, setUserData] = useState({
         username: '',
         password: '',
         email: '',
+        first_name: '',
+        last_name: '',
+        monthly_budget: 0
     })
 
     function handleFormChanges(e) {
@@ -16,9 +21,26 @@ function LoginForm({ onSubmitLoginForm, setCurrentUser }){
         })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        onSubmitLoginForm(userData)
+        const {username, password} = userData
+        try {
+            const response = await fetch(`http://localhost:9292/users/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password }),
+            });
+            if(!response.ok) {
+                throw new Error('Invalid username or password');
+            }
+            const user = await response.json();
+            setCurrentUser(user);
+            history.push('/')
+        } catch (error) {
+            setError(error.message);
+        }
     }
 
     return (
