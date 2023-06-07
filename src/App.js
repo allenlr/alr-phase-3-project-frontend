@@ -1,6 +1,7 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
 import { Route, Switch } from 'react-router-dom';
+import Home from './Home'
 import CreateExpenseFrom from './CreateExpenseForm'
 import CreateUserForm from './CreateUserForm'
 import NavBar from './NavBar'
@@ -51,6 +52,9 @@ function App() {
       <NavBar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Header />
         <Switch>
+          <Route exact path='/'>
+            <Home currentUser={currentUser}/>
+          </Route>
           <Route path='/create-expense-form'>
             <CreateExpenseFrom expenses={expenses} />
           </Route>
