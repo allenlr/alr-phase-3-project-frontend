@@ -1,5 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line
 import { NavLink, useHistory } from 'react-router-dom'
 
 function NavBar({ currentUser, setCurrentUser }){
@@ -7,6 +6,7 @@ function NavBar({ currentUser, setCurrentUser }){
     const history = useHistory();
     const handleLogout = () => {
         setCurrentUser(null);
+        localStorage.removeItem('currentUser')
         history.push('/login-form');
     }
 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { useHistory } from 'react-router-dom';
 
 function LoginForm({ currentUser, setCurrentUser }){
@@ -37,11 +37,18 @@ function LoginForm({ currentUser, setCurrentUser }){
             }
             const user = await response.json();
             setCurrentUser(user);
+            localStorage.setItem('currentUser', JSON.stringify(user));
             history.push('/')
         } catch (error) {
             setError(error.message);
         }
     }
+
+    useEffect(() => {
+        if(currentUser) {
+            history.push('/')
+        }
+    }, [currentUser, history]);
 
     return (
         <div style={{

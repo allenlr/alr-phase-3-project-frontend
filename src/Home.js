@@ -1,10 +1,17 @@
 import React from "react";
 
 function Home({ currentUser }){
-   const name = currentUser? currentUser.first_name : "noname";
+   const name = currentUser? currentUser.first_name : undefined;
+
+   function displayWelcomeMessage(name){
+    if (!name) {
+        return 'Welcome. Please Log in or Create a New Account';
+    }
+    return `Welcome, ${name.charAt(0).toUpperCase() + name.slice(1)}`;
+   }
     return (
         <div>
-            {currentUser? `Welcome, ${name.split('')[0].toUpperCase() + name.slice(1, name.length)}` : `Welcome to FinancEase, please Log In to Start`}
+            {displayWelcomeMessage(name)}
         </div>
     )
 }

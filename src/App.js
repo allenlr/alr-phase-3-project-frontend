@@ -9,9 +9,16 @@ import Header from './Header'
 import LoginForm from './LoginForm'
 
 function App() {
-  const [users, setUsers] = useState([])
-  const [expenses, setExpenses] = useState([])
-  const [currentUser, setCurrentUser] = useState([])
+  const [users, setUsers] = useState([]);
+  const [expenses, setExpenses] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('currentUser');
+    if(storedUser){
+      setCurrentUser(JSON.parse(storedUser))
+    }
+  }, [])
 
   useEffect(() => {
     fetch('http://localhost:9292/expenses')
@@ -45,7 +52,6 @@ function App() {
     })
   }
 
-  console.log(currentUser)
 
   return (
     <div className="App">
