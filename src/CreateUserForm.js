@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
+import { useHistory } from 'react-router-dom'
 
 function CreateUserForm({ onSubmitCreateUser }){
+    const history = useHistory();
     const [newUserData, setNewUserData] = useState({
         username: '',
         password: '',

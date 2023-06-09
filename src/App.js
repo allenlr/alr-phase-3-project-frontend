@@ -1,5 +1,6 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
+import {useHistory} from 'react-router-dom'
 import { Route, Switch } from 'react-router-dom';
 import Home from './Home'
 import CreateExpenseFrom from './CreateExpenseForm'
@@ -13,6 +14,7 @@ function App() {
   const [users, setUsers] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     const storedUser = localStorage.getItem('currentUser');
@@ -44,15 +46,31 @@ function App() {
       body: JSON.stringify(newUser)
     })
       .then((res) => res.json())
-      .then((addedUser) => setUsers([...users, addedUser]))
+      .then((addedUser) => {
+        setUsers([...users, addedUser])
+        history.push('/')
+      })
   }
 
   function onDeleteUser(deletedUserId){
     fetch(`http://localhost:9292/users/${deletedUserId}`, {
       method: 'DELETE'
     })
+    .then((res) => {
+      if(!res.ok){
+        throw new Error('Error deleting user')
+      }
+      return fetch('http://localhost:9292/users')
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUsers(data)
+        history.push('/')
+        setCurrentUser(null)
+      })
   }
 
+  console.log(currentUser)
 
   return (
     <div className="App">
@@ -72,7 +90,7 @@ function App() {
             <LoginForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
           </Route>
           <Route path='/manage-account'>
-            <ManageAccount currentUser={currentUser} />
+            <ManageAccount currentUser={currentUser} setCurrentUser={setCurrentUser} onDeleteUser={onDeleteUser} />
           </Route>
         </Switch>
     </div>

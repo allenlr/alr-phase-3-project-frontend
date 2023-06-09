@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function ManageAccount({ currentUser }){
+function ManageAccount({ currentUser, setCurrentUser, onDeleteUser }){
     const [isEditing, setIsEditing] = useState({
         username: false,
         password: false,
@@ -35,7 +35,7 @@ function ManageAccount({ currentUser }){
 
     function handleUserChangesFormSubmit(e){
         e.preventDefault()
-        const user_id = currentUser.prim
+        const user_id = currentUser.id
         setIsEditing({
             username: false,
             password: false,
@@ -44,15 +44,15 @@ function ManageAccount({ currentUser }){
             last_name: false,
             monthly_budget: false
         })
-        fetch(`http://localhost:9292/${user_id}`{
-            method: PATH,
+        fetch(`http://localhost:9292/${user_id}`, {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(userData)
         })
             .then((res) => res.json())
-            .then((changedUser) => )
+            .then((changedUser) => setCurrentUser(changedUser))
     }
 
     return(
@@ -168,7 +168,7 @@ function ManageAccount({ currentUser }){
                     <button type='submit'>Change Details</button>
                 </p>
             </form>
-            <button style={{width: '6rem', marginLeft:'15rem'}} type='click'>Delete Account</button>
+            <button onClick={() => onDeleteUser(currentUser.id)} style={{width: '6rem', marginLeft:'15rem'}} type='click'>Delete Account</button>
         </div>
     )
 }
