@@ -7,6 +7,7 @@ import CreateUserForm from './CreateUserForm'
 import NavBar from './NavBar'
 import Header from './Header'
 import LoginForm from './LoginForm'
+import ManageAccount from './ManageAccount';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -43,7 +44,7 @@ function App() {
       body: JSON.stringify(newUser)
     })
       .then((res) => res.json())
-      .then((addedUser) => console.log(addedUser))
+      .then((addedUser) => setUsers([...users, addedUser]))
   }
 
   function onDeleteUser(deletedUserId){
@@ -69,6 +70,9 @@ function App() {
           </Route>
           <Route path='/login-form'>
             <LoginForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
+          </Route>
+          <Route path='/manage-account'>
+            <ManageAccount currentUser={currentUser} />
           </Route>
         </Switch>
     </div>
