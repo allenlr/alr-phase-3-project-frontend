@@ -71,7 +71,7 @@ function App() {
       })
   }
 
-  console.log(currentUser)
+  // console.log(currentUser)
 
   return (
     <div className="App">
@@ -81,8 +81,8 @@ function App() {
           <Route exact path='/'>
             <Home currentUser={currentUser}/>
           </Route>
-          <Route path='/expenses'>
-            <Expenses />
+          <Route path='/user-expenses'>
+            <Expenses currentUser={currentUser} />
           </Route>
           <Route path='/create-expense-form'>
             <CreateExpenseFrom expenses={expenses} />

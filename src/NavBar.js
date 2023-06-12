@@ -30,7 +30,7 @@ function NavBar({ currentUser, setCurrentUser }){
                 </NavLink>
                 {currentUser? 
                 <div>
-                    <NavLink to='/user-expenses' style={{ marginRight:'44rem', marginLeft: '1rem'} }>
+                    <NavLink to='/user-expenses' style={{ marginRight:'90rem', marginLeft: '1rem'} }>
                         Expenses
                     </NavLink>
                     <NavLink onClick={handleLogout} exact to='/' style={{marginRight:'1rem'}}>
