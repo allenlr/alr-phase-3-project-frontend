@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 
 function Expenses({ currentUser }){
     const [userExpenses, setUserExpenses] = useState([])
-    const [expenseCategories, setExpenseCategories] = useState([
+    const [selectedCategory, setSelectedCategory] = useState('All')
+    const expenseCategories = [
         "All",
         "Rent/Mortgage",
         "Utilities",
@@ -18,23 +19,39 @@ function Expenses({ currentUser }){
         "Investments",
         "Debt Repayment",
         "Miscellaneous"
-    ])
+    ]
+    console.log(currentUser.id)
+    console.log(selectedCategory)
+function getAllExpenses() {
+    fetch(`http://localhost:9292/expenses/by_user/${currentUser.id}`)
+        .then((res) => res.json())
+        .then((data) => setUserExpenses(data))
+}
+    useEffect(() => {
+        if (selectedCategory != 'All'){
+            const url = `http://localhost:9292/expenses/by_user/${currentUser.id}/${encodeURIComponent(selectedCategory)}`
+            console.log(url)
+            fetch(url)
+            .then((res) => res.json())
+            .then((data) => setUserExpenses(data))
+        }
+        else 
+            getAllExpenses();
+    }, [selectedCategory])
 
     useEffect(() => {
         if (currentUser) {
-            fetch(`http://localhost:9292/expenses/by_user/${currentUser.id}`)
-            .then((res) => res.json())
-            .then((data) => setUserExpenses(data))
+            getAllExpenses();
         }
     }, [currentUser])
 
     console.log(userExpenses)
     return(
         <div>
-            <select>
+            <select onChange={(e) => setSelectedCategory(e.target.value)}>
                 {expenseCategories.map((category) => {
                     return (
-                        <option>{category}</option>
+                        <option value={category} name={category}>{category}</option>
                     )
                 })}
             </select>
