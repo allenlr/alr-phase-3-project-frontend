@@ -9,6 +9,7 @@ import NavBar from './NavBar'
 import Header from './Header'
 import LoginForm from './LoginForm'
 import ManageAccount from './ManageAccount';
+import Expenses from './Expenses';
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -79,6 +80,9 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Home currentUser={currentUser}/>
+          </Route>
+          <Route path='/expenses'>
+            <Expenses />
           </Route>
           <Route path='/create-expense-form'>
             <CreateExpenseFrom expenses={expenses} />
