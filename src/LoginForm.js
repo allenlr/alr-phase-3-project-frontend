@@ -65,8 +65,8 @@ function LoginForm({ currentUser, setCurrentUser }){
                         value={userData.username}
                         name='username'
                         onChange={handleFormChanges}
-                        >
-                        </input>
+                    >
+                    </input>
                 </p>
                 <p>
                     <label>Password: </label>
@@ -82,8 +82,8 @@ function LoginForm({ currentUser, setCurrentUser }){
                 <p>
                     <button type='submit'>Login</button>
                 </p>
+                {error ? <span style={{color: 'red'}}>{error}</span> : null}
             </form>
-
         </div>
     )
 }
