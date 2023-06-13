@@ -1,43 +1,27 @@
 import React, { useEffect, useState } from 'react'
-// import Decimal from 'decimal.js'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 
-function Expenses({ currentUser }){
+function Expenses({ currentUser, expenseCategories }){
     const Decimal = require('decimal.js')
     const [userExpenses, setUserExpenses] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('All')
-    const expenseCategories = [
-        "All",
-        "Rent/Mortgage",
-        "Utilities",
-        "Groceries",
-        "Eating Out",
-        "Transportation",
-        "Healthcare",
-        "Entertainment",
-        "Personal Care",
-        "Education",
-        "Clothing",
-        "Savings",
-        "Investments",
-        "Debt Repayment",
-        "Miscellaneous"
-    ]
-    console.log(currentUser.id)
-    // console.log(selectedCategory)
-    // console.log(userExpenses)
-function getAllExpenses() {
-    fetch(`http://localhost:9292/expenses/by_user/${currentUser.id}`)
-        .then((res) => res.json())
-        .then((data) => setUserExpenses(data))
-}
+    
+    const history = useHistory();
+
+    function getAllExpenses() {
+        fetch(`http://localhost:9292/expenses/by_user/${currentUser.id}`)
+            .then((res) => res.json())
+            .then((data) => setUserExpenses(data))
+    }
+
     useEffect(() => {
         if (selectedCategory != 'All'){
             let category = selectedCategory.replace(/\//g, '_');
             const url = `http://localhost:9292/expenses/by_user/${currentUser.id}/${encodeURIComponent(category)}`
             console.log(url)
             fetch(url)
-            .then((res) => res.json())
-            .then((data) => setUserExpenses(data))
+                .then((res) => res.json())
+                .then((data) => setUserExpenses(data))
         }
         else 
             getAllExpenses();
@@ -49,6 +33,10 @@ function getAllExpenses() {
         }
     }, [currentUser])
 
+    function handleClickAddExpense(){
+        history.push('/create-expense-form')
+    }
+
     // console.log(userExpenses)
     return(
         <div>
@@ -59,7 +47,10 @@ function getAllExpenses() {
                     )
                 })}
             </select>
+            <br></br>
+            <button onClick={handleClickAddExpense} >Add Expense</button>
             <p>Category Total: ${userExpenses.reduce((total, expense) => new Decimal(total).plus(expense.amount).toFixed(2), new Decimal(0)).toString()}</p>
+            
             <br></br>
             {userExpenses.map((expense) => {
                 return (

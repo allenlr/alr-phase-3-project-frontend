@@ -17,6 +17,29 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const history = useHistory();
+  const expenseCategories = [
+    "All",
+    "Rent/Mortgage",
+    "Utilities",
+    "Groceries",
+    "Eating Out",
+    "Transportation",
+    "Healthcare",
+    "Entertainment",
+    "Personal Care",
+    "Education",
+    "Clothing",
+    "Savings",
+    "Investments",
+    "Debt Repayment",
+    "Miscellaneous"
+  ]
+  const paymentMethods = [
+    "Credit Card",
+    "Debit Card",
+    "Gift Card",
+    "Cash"
+  ]
 
   useEffect(() => {
     const storedUser = localStorage.getItem('currentUser');
@@ -39,7 +62,20 @@ function App() {
   }, [])
 
   
-  
+  function onSubmitCreateExpenseForm(newExpense) {
+    fetch('http://localhost:9292/expenses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newExpense)
+    })
+      .then((res) => res.json())
+      .then((addedExpense) => {
+        setExpenses([...expenses, addedExpense])
+        history.push('/user-expenses')
+      })
+  }
   function onSubmitCreateUserForm(newUser){
     fetch('http://localhost:9292/users', {
       method: 'POST',
@@ -87,10 +123,10 @@ function App() {
             <Home currentUser={currentUser}/>
           </Route>
           <Route path='/user-expenses'>
-            <Expenses currentUser={currentUser} />
+            <Expenses currentUser={currentUser} expenseCategories={expenseCategories}/>
           </Route>
           <Route path='/create-expense-form'>
-            <CreateExpenseFrom expenses={expenses} />
+            <CreateExpenseFrom expenses={expenses} setExpenses={setExpenses} expenseCategories={expenseCategories} paymentMethods={paymentMethods} onSubmitCreateExpense={onSubmitCreateExpenseForm} />
           </Route>
           <Route path='/create-user-form'>
             <CreateUserForm users={users} onSubmitCreateUser={onSubmitCreateUserForm} />
