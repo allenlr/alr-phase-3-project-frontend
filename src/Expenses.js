@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Decimal from 'decimal.js'
+// import Decimal from 'decimal.js'
 
 function Expenses({ currentUser }){
     const Decimal = require('decimal.js')
@@ -22,7 +22,7 @@ function Expenses({ currentUser }){
         "Debt Repayment",
         "Miscellaneous"
     ]
-    // console.log(currentUser.id)
+    console.log(currentUser.id)
     // console.log(selectedCategory)
     // console.log(userExpenses)
 function getAllExpenses() {
@@ -49,7 +49,7 @@ function getAllExpenses() {
         }
     }, [currentUser])
 
-    console.log(userExpenses)
+    // console.log(userExpenses)
     return(
         <div>
             <select onChange={(e) => setSelectedCategory(e.target.value)}>

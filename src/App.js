@@ -15,12 +15,14 @@ function App() {
   const [users, setUsers] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
     const storedUser = localStorage.getItem('currentUser');
     if(storedUser){
       setCurrentUser(JSON.parse(storedUser))
+      setLoading(false)
     }
   }, [])
 
@@ -72,6 +74,9 @@ function App() {
   }
 
   // console.log(currentUser)
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="App">

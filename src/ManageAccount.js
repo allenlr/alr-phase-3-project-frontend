@@ -146,7 +146,7 @@ function ManageAccount({ currentUser, setCurrentUser, onDeleteUser }){
                     
                 </p>
                 <p className="input-row">
-                    <label>Set Monthly Budget: </label>
+                    <label>Monthly Budget: </label>
                     {isEditing.monthly_budget ? (
                         <input
                             type='number'
@@ -158,7 +158,7 @@ function ManageAccount({ currentUser, setCurrentUser, onDeleteUser }){
                             >
                         </input>
                     ) : (
-                        <span>{userData.monthly_budget}</span>
+                        <span>${userData.monthly_budget}</span>
                     )}
                     <button onClick={(e) => isEditing.monthly_budget ? handleUserChangesFormSubmit(e) : handleEditClick('monthly_budget')}>
                         {isEditing.monthly_budget ? 'save' : 'edit'}
