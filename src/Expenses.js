@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import Decimal from 'decimal.js'
 
 function Expenses({ currentUser }){
+    const Decimal = require('decimal.js')
     const [userExpenses, setUserExpenses] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('All')
     const expenseCategories = [
@@ -20,8 +22,9 @@ function Expenses({ currentUser }){
         "Debt Repayment",
         "Miscellaneous"
     ]
-    console.log(currentUser.id)
-    console.log(selectedCategory)
+    // console.log(currentUser.id)
+    // console.log(selectedCategory)
+    // console.log(userExpenses)
 function getAllExpenses() {
     fetch(`http://localhost:9292/expenses/by_user/${currentUser.id}`)
         .then((res) => res.json())
@@ -29,7 +32,8 @@ function getAllExpenses() {
 }
     useEffect(() => {
         if (selectedCategory != 'All'){
-            const url = `http://localhost:9292/expenses/by_user/${currentUser.id}/${encodeURIComponent(selectedCategory)}`
+            let category = selectedCategory.replace(/\//g, '_');
+            const url = `http://localhost:9292/expenses/by_user/${currentUser.id}/${encodeURIComponent(category)}`
             console.log(url)
             fetch(url)
             .then((res) => res.json())
@@ -55,10 +59,11 @@ function getAllExpenses() {
                     )
                 })}
             </select>
+            <p>Category Total: ${userExpenses.reduce((total, expense) => new Decimal(total).plus(expense.amount).toFixed(2), new Decimal(0)).toString()}</p>
+            <br></br>
             {userExpenses.map((expense) => {
                 return (
                     <div>
-                        
                         <div style={{color: 'black'}}>
                             <p>{expense.name} : ${expense.amount}</p>
                             <p>Date Incurred: {expense.date_incurred}</p>
