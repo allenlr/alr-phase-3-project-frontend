@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 
-function CreateExpenseForm({ expenses, setExpenses, expenseCategories, paymentMethods, onSubmitCreateExpense }){
+function CreateExpenseForm({ expenseCategories, paymentMethods, onSubmitCreateExpense }){
+    const categories = expenseCategories.filter((category) => category != 'All')
     const [newExpense, setNewExpense] = useState({
         name: '',
         amount: '',
         date_incurred: '',
-        category: '',
-        payment_method: ''
+        category: categories[0],
+        payment_method: paymentMethods[0]
     })
-    const categories = expenseCategories.filter((category) => category != 'All')
+    
 
     function handleExpenseFormChanges(e){
         const keyName = e.target.name
@@ -51,7 +52,7 @@ function CreateExpenseForm({ expenses, setExpenses, expenseCategories, paymentMe
                 <p className="input-row">
                     <label>Date Incurred: </label>
                     <input
-                        type='text'
+                        type='date'
                         value={newExpense.date_incurred}
                         name='date_incurred'
                         onChange={handleExpenseFormChanges}
@@ -63,7 +64,7 @@ function CreateExpenseForm({ expenses, setExpenses, expenseCategories, paymentMe
                     <select onChange={handleExpenseFormChanges} value={newExpense.category} name='category'>
                         {categories.map((category) => {
                             return (
-                                <option>{category}</option>
+                                <option key={category}>{category}</option>
                             )
                         })}
                     </select>
@@ -73,7 +74,7 @@ function CreateExpenseForm({ expenses, setExpenses, expenseCategories, paymentMe
                     <select onChange={handleExpenseFormChanges} value={newExpense.payment_method} name='payment_method'>
                         {paymentMethods.map((payMethod) => {
                         return (
-                            <option>{payMethod}</option>
+                            <option key={payMethod}>{payMethod}</option>
                         )})}
                     </select>
                 </p>

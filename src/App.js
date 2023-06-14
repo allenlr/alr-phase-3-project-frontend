@@ -63,19 +63,25 @@ function App() {
 
   
   function onSubmitCreateExpenseForm(newExpense) {
+    const expenseWithUser = {
+      ...newExpense,
+      user_id: currentUser.id
+    }
+    console.log(expenseWithUser)
     fetch('http://localhost:9292/expenses', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(newExpense)
+      body: JSON.stringify(expenseWithUser),
     })
       .then((res) => res.json())
       .then((addedExpense) => {
         setExpenses([...expenses, addedExpense])
-        history.push('/user-expenses')
+        // history.push('/user-expenses')
       })
   }
+
   function onSubmitCreateUserForm(newUser){
     fetch('http://localhost:9292/users', {
       method: 'POST',
@@ -126,7 +132,11 @@ function App() {
             <Expenses currentUser={currentUser} expenseCategories={expenseCategories}/>
           </Route>
           <Route path='/create-expense-form'>
-            <CreateExpenseFrom expenses={expenses} setExpenses={setExpenses} expenseCategories={expenseCategories} paymentMethods={paymentMethods} onSubmitCreateExpense={onSubmitCreateExpenseForm} />
+            <CreateExpenseFrom 
+              expenseCategories={expenseCategories} 
+              paymentMethods={paymentMethods} 
+              onSubmitCreateExpense={onSubmitCreateExpenseForm} 
+            />
           </Route>
           <Route path='/create-user-form'>
             <CreateUserForm users={users} onSubmitCreateUser={onSubmitCreateUserForm} />
