@@ -37,13 +37,12 @@ function Expenses({ currentUser, expenseCategories }){
         history.push('/create-expense-form')
     }
 
-    // console.log(userExpenses)
     return(
-        <div>
+        <div style={{width: '100%', overflow: 'auto', maxHeight: '800px' }}>
             <select onChange={(e) => setSelectedCategory(e.target.value)}>
                 {expenseCategories.map((category) => {
                     return (
-                        <option value={category} name={category}>{category}</option>
+                        <option key={category} value={category} name={category}>{category}</option>
                     )
                 })}
             </select>
