@@ -1,7 +1,8 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
-import {useHistory} from 'react-router-dom'
-import { Route, Switch } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom'
+// import { Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom'
 import Home from './Home'
 import CreateExpenseFrom from './CreateExpenseForm'
 import CreateUserForm from './CreateUserForm'
@@ -16,7 +17,7 @@ function App() {
   const [expenses, setExpenses] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const history = useHistory();
+  const navigate = useNavigate();
   const expenseCategories = [
     "All",
     "Rent/Mortgage",
@@ -78,7 +79,7 @@ function App() {
       .then((res) => res.json())
       .then((addedExpense) => {
         setExpenses([...expenses, addedExpense])
-        // history.push('/user-expenses')
+        // navigate.push('/user-expenses')
       })
   }
 
@@ -93,7 +94,7 @@ function App() {
       .then((res) => res.json())
       .then((addedUser) => {
         setUsers([...users, addedUser])
-        history.push('/')
+        navigate.push('/')
       })
   }
 
@@ -110,7 +111,7 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setUsers(data)
-        history.push('/')
+        navigate.push('/')
         setCurrentUser(null)
       })
   }
@@ -124,30 +125,18 @@ function App() {
     <div className="App">
       <NavBar currentUser={currentUser} setCurrentUser={setCurrentUser}/>
       <Header />
-        <Switch>
-          <Route exact path='/'>
-            <Home currentUser={currentUser}/>
-          </Route>
-          <Route path='/user-expenses'>
-            <Expenses currentUser={currentUser} expenseCategories={expenseCategories}/>
-          </Route>
-          <Route path='/create-expense-form'>
-            <CreateExpenseFrom 
+        <Routes>
+          <Route exact path='/' element={<Home currentUser={currentUser}/>} />
+          <Route path='/user-expenses' element={<Expenses currentUser={currentUser} expenseCategories={expenseCategories}/>} />
+          <Route path='/create-expense-form' element={<CreateExpenseFrom 
               expenseCategories={expenseCategories} 
               paymentMethods={paymentMethods} 
               onSubmitCreateExpense={onSubmitCreateExpenseForm} 
-            />
-          </Route>
-          <Route path='/create-user-form'>
-            <CreateUserForm users={users} onSubmitCreateUser={onSubmitCreateUserForm} />
-          </Route>
-          <Route path='/login-form'>
-            <LoginForm currentUser={currentUser} setCurrentUser={setCurrentUser} />
-          </Route>
-          <Route path='/manage-account'>
-            <ManageAccount currentUser={currentUser} setCurrentUser={setCurrentUser} onDeleteUser={onDeleteUser} />
-          </Route>
-        </Switch>
+            />} />
+          <Route path='/create-user-form' element={<CreateUserForm users={users} onSubmitCreateUser={onSubmitCreateUserForm} />} />
+          <Route path='/login-form' element={<LoginForm currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
+          <Route path='/manage-account' element={<ManageAccount currentUser={currentUser} setCurrentUser={setCurrentUser} onDeleteUser={onDeleteUser} />} />
+        </Routes>
     </div>
   );
 }

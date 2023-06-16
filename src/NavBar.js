@@ -1,13 +1,13 @@
 import React from 'react';
-import { NavLink, useHistory } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 
 function NavBar({ currentUser, setCurrentUser }){
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const handleLogout = () => {
         setCurrentUser(null);
         localStorage.removeItem('currentUser')
-        history.push('/login-form');
+        navigate.push('/login-form');
     }
 
     return (

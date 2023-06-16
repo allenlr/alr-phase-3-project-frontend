@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm({ currentUser, setCurrentUser }){
-    const history = useHistory();
+    const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [userData, setUserData] = useState({
         username: '',
@@ -38,7 +38,7 @@ function LoginForm({ currentUser, setCurrentUser }){
             const user = await response.json();
             setCurrentUser(user);
             localStorage.setItem('currentUser', JSON.stringify(user));
-            history.push('/')
+            navigate.push('/')
         } catch (error) {
             setError(error.message);
         }
@@ -46,9 +46,9 @@ function LoginForm({ currentUser, setCurrentUser }){
 
     useEffect(() => {
         if(currentUser) {
-            history.push('/')
+            navigate.push('/')
         }
-    }, [currentUser, history]);
+    }, [currentUser, navigate]);
 
     return (
         <div style={{

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { useNavigate } from 'react-router-dom'
 
 function Expenses({ currentUser, expenseCategories }){
     const Decimal = require('decimal.js')
     const [userExpenses, setUserExpenses] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('All')
     
-    const history = useHistory();
+    const navigate = useNavigate();
 
     function getAllExpenses() {
         fetch(`http://localhost:9292/expenses/by_user/${currentUser.id}`)
@@ -34,7 +34,7 @@ function Expenses({ currentUser, expenseCategories }){
     }, [currentUser])
 
     function handleClickAddExpense(){
-        history.push('/create-expense-form')
+        navigate.push('/create-expense-form')
     }
 
     return(
