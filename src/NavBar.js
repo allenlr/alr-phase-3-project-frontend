@@ -7,7 +7,7 @@ function NavBar({ currentUser, setCurrentUser }){
     const handleLogout = () => {
         setCurrentUser(null);
         localStorage.removeItem('currentUser')
-        navigate.push('/login-form');
+        navigate('/login-form');
     }
 
     return (

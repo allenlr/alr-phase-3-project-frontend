@@ -34,7 +34,7 @@ function Expenses({ currentUser, expenseCategories }){
     }, [currentUser])
 
     function handleClickAddExpense(){
-        navigate.push('/create-expense-form')
+        navigate('/create-expense-form')
     }
 
     return(

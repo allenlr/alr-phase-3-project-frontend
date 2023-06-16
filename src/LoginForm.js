@@ -38,7 +38,7 @@ function LoginForm({ currentUser, setCurrentUser }){
             const user = await response.json();
             setCurrentUser(user);
             localStorage.setItem('currentUser', JSON.stringify(user));
-            navigate.push('/')
+            navigate('/')
         } catch (error) {
             setError(error.message);
         }
@@ -46,7 +46,7 @@ function LoginForm({ currentUser, setCurrentUser }){
 
     useEffect(() => {
         if(currentUser) {
-            navigate.push('/')
+            navigate('/')
         }
     }, [currentUser, navigate]);
 

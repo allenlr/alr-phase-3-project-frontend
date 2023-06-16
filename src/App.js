@@ -46,8 +46,8 @@ function App() {
     const storedUser = localStorage.getItem('currentUser');
     if(storedUser){
       setCurrentUser(JSON.parse(storedUser))
-      setLoading(false)
     }
+    setLoading(false)
   }, [])
 
   useEffect(() => {
@@ -79,7 +79,7 @@ function App() {
       .then((res) => res.json())
       .then((addedExpense) => {
         setExpenses([...expenses, addedExpense])
-        // navigate.push('/user-expenses')
+        // navigate('/user-expenses')
       })
   }
 
@@ -94,7 +94,7 @@ function App() {
       .then((res) => res.json())
       .then((addedUser) => {
         setUsers([...users, addedUser])
-        navigate.push('/')
+        navigate('/')
       })
   }
 
@@ -111,12 +111,11 @@ function App() {
       .then((res) => res.json())
       .then((data) => {
         setUsers(data)
-        navigate.push('/')
+        navigate('/')
         setCurrentUser(null)
       })
   }
 
-  // console.log(currentUser)
   if (loading) {
     return <div>Loading...</div>;
   }
