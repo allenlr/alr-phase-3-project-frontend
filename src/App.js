@@ -1,8 +1,6 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom'
-// import { Route, Switch } from 'react-router-dom';
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import Home from './Home'
 import CreateExpenseFrom from './CreateExpenseForm'
 import CreateUserForm from './CreateUserForm'
@@ -11,8 +9,11 @@ import Header from './Header'
 import LoginForm from './LoginForm'
 import ManageAccount from './ManageAccount';
 import Expenses from './Expenses';
+import Users from './Users'
+import UserLink from './UserLink'
 
 function App() {
+  const params = useParams();
   const [users, setUsers] = useState([]);
   const [expenses, setExpenses] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
@@ -135,6 +136,8 @@ function App() {
           <Route path='/create-user-form' element={<CreateUserForm users={users} onSubmitCreateUser={onSubmitCreateUserForm} />} />
           <Route path='/login-form' element={<LoginForm currentUser={currentUser} setCurrentUser={setCurrentUser} />} />
           <Route path='/manage-account' element={<ManageAccount currentUser={currentUser} setCurrentUser={setCurrentUser} onDeleteUser={onDeleteUser} />} />
+          <Route exact path='/users' element={<Users />} />
+          <Route path='/users/:id' element={<UserLink/>} />
         </Routes>
     </div>
   );

@@ -28,11 +28,17 @@ function NavBar({ currentUser, setCurrentUser }){
                 <NavLink exact to='/' style={{ marginRight: 'auto' }}>
                     Home
                 </NavLink>
+                <NavLink exact to='/users' style={{marginRight: 'auto', marginLeft: '1rem'}} >
+                    Users
+                </ NavLink>
+                
                 {currentUser? 
                 <div>
+                    {/* <NavLink to='/users' style={{marginRight: 'auto'}}>Users</NavLink> */}
                     <NavLink to='/user-expenses' style={{ marginRight:'90rem', marginLeft: '1rem'} }>
                         Expenses
                     </NavLink>
+                    
                     <NavLink onClick={handleLogout} exact to='/' style={{marginRight:'1rem'}}>
                         Log Out
                     </NavLink>
