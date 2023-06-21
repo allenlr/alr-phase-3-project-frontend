@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import Expense from './Expense'
 import ExpenseForm from './ExpenseForm'
 
-function User(){
+function User({ submitExpenseForm }){
     const { id } = useParams()
     const [user, setUser] = useState(null);
     const [expenseFormFlag, setExpenseFormFlag] = useState(false)
@@ -24,13 +24,13 @@ function User(){
         fetch(`http://localhost:9292/users/${id}`)
         .then((res) => res.json())
         .then((data) => setUser(data))
-    }, [id])
+    }, [id, submitExpenseForm])
 
     const expenses = user ? (user.expenses.map((expense) => {
-        return <Expense key={expense.id} expense={expense} />
+        return <Expense key={expense.id} expense={expense}  />
     })) : null;
     
-    // console.log(expenseFormFlag)
+    console.log(expenseFormFlag)
 
     return(
         <div style={{marginRight: '2rem'}}>
@@ -42,7 +42,7 @@ function User(){
                 <br></br>
                     <h2>{user.first_name}</h2>
                     <hr/>
-                    {expenseFormFlag ? <ExpenseForm /> : null }
+                    {expenseFormFlag ? <ExpenseForm submitExpenseForm={submitExpenseForm}/> : null }
                     <h3>Expenses:</h3>
                     <button onClick={() => setExpenseFormFlag(!expenseFormFlag)}>Add Expense</button>
                     <br></br>

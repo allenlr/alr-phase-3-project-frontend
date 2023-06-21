@@ -32,8 +32,6 @@ function NavBar(){
                         Manage Account
                     </NavLink> */}
                 </div>
-                    <NavLink to='/create-user-form' style={{ position: 'right'}}>Create User</NavLink>
-                
         </nav>
     )
 }
