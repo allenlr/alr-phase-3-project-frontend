@@ -1,14 +1,9 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom'
 
-function NavBar({ currentUser, setCurrentUser }){
+function NavBar(){
 
     const navigate = useNavigate();
-    const handleLogout = () => {
-        setCurrentUser(null);
-        localStorage.removeItem('currentUser')
-        navigate('/login-form');
-    }
 
     return (
         <nav
@@ -28,30 +23,16 @@ function NavBar({ currentUser, setCurrentUser }){
                 <NavLink exact to='/' style={{ marginRight: 'auto' }}>
                     Home
                 </NavLink>
-                <NavLink exact to='/users' style={{marginRight: 'auto', marginLeft: '1rem'}} >
+                <NavLink exact to='/users' style={{marginRight: 'auto'}} >
                     Users
                 </ NavLink>
-                
-                {currentUser? 
                 <div>
-                    {/* <NavLink to='/users' style={{marginRight: 'auto'}}>Users</NavLink> */}
-                    <NavLink to='/user-expenses' style={{ marginRight:'90rem', marginLeft: '1rem'} }>
-                        Expenses
-                    </NavLink>
                     
-                    <NavLink onClick={handleLogout} exact to='/' style={{marginRight:'1rem'}}>
-                        Log Out
-                    </NavLink>
-                    <NavLink to='/manage-account' style={{marginRight: '1rem'}}>
+                    {/* <NavLink to='/manage-account' style={{marginRight: '1rem'}}>
                         Manage Account
-                    </NavLink>
+                    </NavLink> */}
                 </div>
-                    :
-                    <NavLink to='/login-form' style={{marginRight:'1rem'}}>
-                        Log In
-                    </NavLink>}
-                {/* <NavLink to={!currentUser ? '/login-form' : '/'} style={{ marginRight:'1rem'}}>{!currentUser ? "Login" : "Log Out"}</NavLink> */}
-                <NavLink to='/create-user-form' style={{ position: 'right'}}>Create Account</NavLink>
+                    <NavLink to='/create-user-form' style={{ position: 'right'}}>Create User</NavLink>
                 
         </nav>
     )

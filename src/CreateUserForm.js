@@ -1,15 +1,13 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom'
 
-function CreateUserForm({ onSubmitCreateUser }){
+function CreateUserForm(){
     // const navigate = useNavigate();
     const [newUserData, setNewUserData] = useState({
         username: '',
-        password: '',
         email: '',
         first_name: '',
-        last_name: '',
-        monthly_budget: 0.00
+        last_name: ''
     })
     
     function handleNewUserFormChanges(e){
@@ -20,15 +18,15 @@ function CreateUserForm({ onSubmitCreateUser }){
         })
     }
 
-    function onNewUserFormSubmit(e){
-        e.preventDefault();
-        onSubmitCreateUser(newUserData)
-    }
+    // function onNewUserFormSubmit(e){
+    //     e.preventDefault();
+    //     onSubmitCreateUser(newUserData)
+    // }
 
     return (
         <div className="input-table">
             <h3>Enter New User Information</h3>
-            <form onSubmit={onNewUserFormSubmit}>
+            <form >
                 <p className="input-row">
                     <label>First Name: </label>
                     <input
