@@ -74,14 +74,14 @@ function App() {
       <NavBar />
       <Header />
         <Routes>
-          <Route exact path='/' element={<Home />} />
+          <Route path='/' element={<Home />} />
           {/* <Route path='/user-expenses' element={<Expenses expenseCategories={expenseCategories}/>} /> */}
           <Route path='/create-expense-form' element={<CreateExpenseFrom 
               // expenseCategories={expenseCategories}
             />} />
           <Route path='/create-user-form' element={<CreateUserForm users={users} />} />
-          <Route exact path='/users' element={<Users users={users} />} />
-          <Route path='/users/:id' element={<User users={users}  />} />
+          <Route path='/users' element={<Users users={users} />} />
+          <Route path='/users/:id' element={<User />} />
         </Routes>
     </div>
   );

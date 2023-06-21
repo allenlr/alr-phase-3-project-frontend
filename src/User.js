@@ -26,13 +26,11 @@ function User(){
         .then((data) => setUser(data))
     }, [id])
 
-    console.log(user)
-
-    const expenses = user.expenses.map((expense) => {
+    const expenses = user ? (user.expenses.map((expense) => {
         return <Expense key={expense.id} expense={expense} />
-    })
-
-    console.log(expenseFormFlag)
+    })) : null;
+    
+    // console.log(expenseFormFlag)
 
     return(
         <div style={{marginRight: '2rem'}}>
@@ -56,6 +54,6 @@ function User(){
         </div>
     )
 
-    
+
 }
-export default User
+export default User;

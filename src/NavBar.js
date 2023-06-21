@@ -20,10 +20,10 @@ function NavBar(){
                 right:0,
                 height: '20px',
             }}>
-                <NavLink exact to='/' style={{ marginRight: 'auto' }}>
+                <NavLink to='/' style={{ marginRight: 'auto' }}>
                     Home
                 </NavLink>
-                <NavLink exact to='/users' style={{marginRight: 'auto'}} >
+                <NavLink to='/users' style={{marginRight: 'auto'}} >
                     Users
                 </ NavLink>
                 <div>
