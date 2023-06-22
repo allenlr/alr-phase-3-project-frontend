@@ -1,7 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-function Expense({ expense }){
+function Expense({ expense, onDeleteExpense }){
     // console.log(expense)
+
+    function handleDeleteExpense(){
+        onDeleteExpense(expense.id, expense.user_id)
+        console.log('deleted')
+    }
     return (
         <div>
             Name: {expense.name}
@@ -12,6 +18,8 @@ function Expense({ expense }){
             <br></br>
             Category: {expense.category}
             <br></br>
+            <br></br>
+            <button onClick={() => handleDeleteExpense()} style={{color: 'blue', background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer', textDecoration: 'underline'}}>Delete Expense</button>
             <br></br>
             <br></br>
 

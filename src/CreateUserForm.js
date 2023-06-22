@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom'
 
-function CreateUserForm(){
+function CreateUserForm({ submitUserForm }){
     // const navigate = useNavigate();
     const [newUserData, setNewUserData] = useState({
         username: '',
@@ -18,15 +18,16 @@ function CreateUserForm(){
         })
     }
 
-    // function onNewUserFormSubmit(e){
-    //     e.preventDefault();
-    //     onSubmitCreateUser(newUserData)
-    // }
+    function onNewUserFormSubmit(e){
+        e.preventDefault();
+        submitUserForm(newUserData)
+        console.log(newUserData)
+    }
 
     return (
         <div className="input-table">
             <h3>Enter New User Information</h3>
-            <form >
+            <form onSubmit={ onNewUserFormSubmit }>
                 <p className="input-row">
                     <label>First Name: </label>
                     <input
@@ -58,33 +59,11 @@ function CreateUserForm(){
                     </input>
                 </p>
                 <p className="input-row">
-                    <label>Password: </label>
-                    <input
-                        type='password'
-                        value={newUserData.password}
-                        name='password'
-                        onChange={handleNewUserFormChanges}
-                        >
-                    </input>
-                </p>
-                <p className="input-row">
                     <label>Email: </label>
                     <input 
                         type='text'
                         value={newUserData.email}
                         name='email'
-                        onChange={handleNewUserFormChanges}
-                        >
-                    </input>
-                </p>
-                <p className="input-row">
-                    <label>Set Monthly Budget: </label>
-                    <input
-                        type='number'
-                        step='0.01'
-                        min='0'
-                        value={newUserData.monthly_budget}
-                        name='monthly_budget'
                         onChange={handleNewUserFormChanges}
                         >
                     </input>

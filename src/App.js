@@ -2,7 +2,6 @@ import './App.css';
 import React, {useEffect, useState} from 'react';
 import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import Home from './Home'
-import CreateUserForm from './CreateUserForm'
 import NavBar from './NavBar'
 import Header from './Header'
 import Users from './Users'
@@ -11,7 +10,6 @@ import User from './User'
 function App() {
   const params = useParams();
   const [users, setUsers] = useState([]);
-  // const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   
 
@@ -47,20 +45,28 @@ function App() {
       })
   }
 
-  // function onSubmitCreateUserForm(newUser){
-  //   fetch('http://localhost:9292/users', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(newUser)
-  //   })
-  //     .then((res) => res.json())
-  //     .then((addedUser) => {
-  //       setUsers([...users, addedUser])
-  //       navigate('/')
-  //     })
-  // }
+  function onSubmitCreateUserForm(newUser){
+    fetch(`http://localhost:9292/users`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser),
+    })
+      .then((res) => res.json())
+      .then((addedUser) => {
+        console.log(addedUser)
+        setUsers([...users, addedUser])
+      })
+  }
+
+  function deleteExpense(expenseId, userId){
+    fetch(`http://localhost:9292/users/${userId}/expenses/${expenseId}`, {
+      method: 'DELETE'
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+  }
 
   // function onDeleteUser(deletedUserId){
   //   fetch(`http://localhost:9292/users/${deletedUserId}`, {
@@ -85,10 +91,9 @@ function App() {
       <Header />
         <Routes>
           <Route path='/' element={<Home />} />
-          {/* <Route path='/user-expenses' element={<Expenses expenseCategories={expenseCategories}/>} /> */}
-          <Route path='/create-user-form' element={<CreateUserForm users={users} />} />
-          <Route path='/users' element={<Users users={users} />} />
-          <Route path='/users/:id' element={<User submitExpenseForm={onSubmitCreateExpenseForm} />} />
+          {/* <Route path='/create-user-form' element={<CreateUserForm users={users}  />} /> */}
+          <Route path='/users' element={<Users users={users} submitUserForm={onSubmitCreateUserForm} />} />
+          <Route path='/users/:id' element={<User submitExpenseForm={onSubmitCreateExpenseForm} onDeleteExpense={deleteExpense} />} />
         </Routes>
     </div>
   );

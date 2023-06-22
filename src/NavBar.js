@@ -23,7 +23,7 @@ function NavBar(){
                 <NavLink to='/' style={{ marginRight: 'auto' }}>
                     Home
                 </NavLink>
-                <NavLink to='/users' style={{marginRight: 'auto'}} >
+                <NavLink to='/users' style={{marginRight: 'right'}} >
                     Users
                 </ NavLink>
                 <div>

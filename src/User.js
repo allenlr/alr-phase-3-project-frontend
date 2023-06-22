@@ -3,22 +3,10 @@ import { useParams } from 'react-router-dom'
 import Expense from './Expense'
 import ExpenseForm from './ExpenseForm'
 
-function User({ submitExpenseForm }){
+function User({ submitExpenseForm, onDeleteExpense }){
     const { id } = useParams()
     const [user, setUser] = useState(null);
     const [expenseFormFlag, setExpenseFormFlag] = useState(false)
-
-    // const addExpense = (newExpense, user_id) => {
-    //     fetch(`http://localhost:9292/users/${user_id}/expenses/${newExpense.id}`, {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: {newExpense},
-    //     })
-    //     .then((res) => res.json())
-    //     .then((addedExpense) => [...user.expenses, addedExpense])
-    // }
 
     useEffect(() => {
         fetch(`http://localhost:9292/users/${id}`)
@@ -27,7 +15,7 @@ function User({ submitExpenseForm }){
     }, [id, submitExpenseForm])
 
     const expenses = user ? (user.expenses.map((expense) => {
-        return <Expense key={expense.id} expense={expense}  />
+        return <Expense key={expense.id} expense={expense} onDeleteExpense={onDeleteExpense} />
     })) : null;
     
     console.log(expenseFormFlag)

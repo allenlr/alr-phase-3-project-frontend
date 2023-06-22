@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import UserLink from './UserLink'
+import CreateUserForm from './CreateUserForm'
 
-const Users = ({ users }) => {
-    // const [users, setUsers] = useState([])
+const Users = ({ users, submitUserForm }) => {
     const [userFormFlag, setUserFormFlag] = useState(false)
 
     const usersList = users.map((user) => {
@@ -11,7 +11,9 @@ const Users = ({ users }) => {
 
     return (
         <div style={{marginRight: '5rem'}}>
-            <ul>{usersList}</ul>
+            <button onClick={() => setUserFormFlag(!userFormFlag)}>Create New User</button>
+            {userFormFlag ? <CreateUserForm submitUserForm={submitUserForm} /> : null}
+            <ul style={{marginRight: '2rem'}}>{usersList}</ul>
         </div>
     )
 }
