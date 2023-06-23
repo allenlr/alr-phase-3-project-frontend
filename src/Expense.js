@@ -1,28 +1,60 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
-function Expense({ expense, onDeleteExpense }){
+function Expense({ expense, onDeleteExpense, setExpenseFormMode, setExpense }){
     // console.log(expense)
 
+
     function handleDeleteExpense(){
-        onDeleteExpense(expense.id, expense.user_id)
+        onDeleteExpense(expense)
         console.log('deleted')
     }
+
+    function handleEditExpense(){
+        setExpenseFormMode('update')
+        setExpense(expense)
+    }
+
     return (
         <div>
-            Name: {expense.name}
+           <span style={{fontWeight: 'bold'}}>Name</span><span>: {expense.name}</span>
             <br></br>
-            Amount: {expense.amount}
+            <span style={{fontWeight: 'bold'}}>Amount</span><span>: {expense.amount}</span>
             <br></br>
-            Date Incurred: {expense.date_incurred}
+            <span style={{fontWeight: 'bold'}}>Date Incurred</span><span>: {expense.date_incurred}</span>
             <br></br>
-            Category: {expense.category}
+            <span style={{fontWeight: 'bold'}}>Category</span><span>: {expense.category}</span>
+            <br></br>
+            <button 
+            onClick={() => handleEditExpense()} 
+            style={{
+                color: 'blue', 
+                background: 'none', 
+                border: 'none', 
+                padding: 0, 
+                font: 'inherit', 
+                cursor: 'pointer', 
+                textDecoration: 'underline'}}
+            >
+                Edit Expense
+            </button>
+            <br></br>
+            <button 
+            onClick={() => handleDeleteExpense()} 
+            style={{
+                color: 'blue', 
+                background: 'none', 
+                border: 'none', 
+                padding: 0, 
+                font: 'inherit', 
+                cursor: 'pointer', 
+                textDecoration: 'underline'}}
+            >
+                Delete Expense
+            </button>
             <br></br>
             <br></br>
-            <button onClick={() => handleDeleteExpense()} style={{color: 'blue', background: 'none', border: 'none', padding: 0, font: 'inherit', cursor: 'pointer', textDecoration: 'underline'}}>Delete Expense</button>
             <br></br>
             <br></br>
-
         </div>
     )
 }

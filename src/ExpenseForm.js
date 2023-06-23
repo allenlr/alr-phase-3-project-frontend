@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
-function ExpenseForm({ submitExpenseForm }){
-    const { id } = useParams();
+function ExpenseForm({ submitExpenseForm, onUpdateExpense, expenseFormMode, setExpenseFormMode, expense }){
+    const { userId } = useParams();
     const expenseCategories = [
-        "All",
         "Hotel",
         "Meal",
         "Miscellaneous food and beverage",
@@ -12,12 +11,35 @@ function ExpenseForm({ submitExpenseForm }){
         "Transportation",
         "Other"
       ]
+      
     const [newExpense, setNewExpense] = useState({
         name: '',
         amount: '',
         date_incurred: '',
-        category: expenseCategories[0],
+        category: expenseCategories[0]
     })
+
+    useEffect(() => {
+        if (expenseFormMode === 'create'){
+            setNewExpense({
+                name: '',
+                amount: '',
+                date_incurred: '',
+                category: expenseCategories[0]
+            })
+        }
+        else if (expenseFormMode === 'update') {
+            setNewExpense({
+                id: expense.id,
+                name: expense.name,
+                amount: expense.amount,
+                date_incurred: expense.date_incurred,
+                category: expense.category,
+                user_id: expense.user_id
+            })
+        }
+    }, [expenseFormMode, expense])
+
 
     // function addExpense(e){
     //     e.preventDefault();
@@ -34,12 +56,18 @@ function ExpenseForm({ submitExpenseForm }){
 
     function formSubmit(e){
         e.preventDefault()
-        submitExpenseForm(id, newExpense)
+        if (expenseFormMode === 'create'){
+            submitExpenseForm(userId, newExpense)
+        }
+        else if (expenseFormMode === 'update'){
+            onUpdateExpense(newExpense)
+        }
+        setExpenseFormMode(null)
     }
     
     return (
         <div className="input-table">
-            <h3>Enter Expense</h3>
+            <h3>{expenseFormMode === 'create' ? 'Enter Expense' : 'Enter New Expense Information'}</h3>
             <form onSubmit={formSubmit}>
                 <p className="input-row">
                     <label>Expense Name: </label>
@@ -82,7 +110,7 @@ function ExpenseForm({ submitExpenseForm }){
                     </select>
                 </p>
                 <p>
-                    <button type='submit'>Create Expense</button>
+                    <button type='submit'>{expenseFormMode === 'create' ? 'Create Expense' : 'Update Expense'}</button>
                 </p>
             </form>
         </div>

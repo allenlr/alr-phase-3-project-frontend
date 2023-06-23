@@ -60,30 +60,6 @@ function App() {
       })
   }
 
-  function deleteExpense(expenseId, userId){
-    fetch(`http://localhost:9292/users/${userId}/expenses/${expenseId}`, {
-      method: 'DELETE'
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-  }
-
-  // function onDeleteUser(deletedUserId){
-  //   fetch(`http://localhost:9292/users/${deletedUserId}`, {
-  //     method: 'DELETE'
-  //   })
-  //   .then((res) => {
-  //     if(!res.ok){
-  //       throw new Error('Error deleting user')
-  //     }
-  //     return fetch('http://localhost:9292/users')
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setUsers(data)
-  //       navigate('/')
-  //     })
-  // }
 
   return (
     <div className="App">
@@ -93,7 +69,7 @@ function App() {
           <Route path='/' element={<Home />} />
           {/* <Route path='/create-user-form' element={<CreateUserForm users={users}  />} /> */}
           <Route path='/users' element={<Users users={users} submitUserForm={onSubmitCreateUserForm} />} />
-          <Route path='/users/:id' element={<User submitExpenseForm={onSubmitCreateExpenseForm} onDeleteExpense={deleteExpense} />} />
+          <Route path='/users/:id' element={<User submitExpenseForm={onSubmitCreateExpenseForm} users={users} setUsers={setUsers} />} />
         </Routes>
     </div>
   );
