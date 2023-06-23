@@ -37,7 +37,9 @@ function User({ submitExpenseForm, users, setUsers }){
                             } 
                             else return e;
                         })
-                    } else return user
+                    } else {
+                        return user
+                    }
                 })
                 setUsers(updatedUsers)
             })
@@ -52,6 +54,9 @@ function User({ submitExpenseForm, users, setUsers }){
             const updatedUsers = users.map((user) => {
                 if (id === deletedExpense.user_id) {
                     return {...user, expenses: user.expenses.filter((expense) => expense.id !== deletedExpense.id)}
+                }
+                else {
+                    return user
                 }
             })
             setUsers(updatedUsers)
