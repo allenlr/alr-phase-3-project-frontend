@@ -1,17 +1,14 @@
 import './App.css';
 import React, {useEffect, useState} from 'react';
-import { Route, Routes, useNavigate, useParams } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Home from './Home'
 import NavBar from './NavBar'
 import Header from './Header'
 import Users from './Users'
 import User from './User'
-import EditUserForm from './EditUserForm';
 
 function App() {
-  const params = useParams();
   const [users, setUsers] = useState([]);
-  const navigate = useNavigate();
   
 
   useEffect(() => {
@@ -20,8 +17,8 @@ function App() {
     .then((data) => setUsers(data))
   }, [])
   
-  function onSubmitCreateExpenseForm(id, newExpense) {
-    fetch(`http://localhost:9292/users/${id}/expenses`, {
+  function onSubmitCreateExpenseForm(userId, newExpense) {
+    fetch(`http://localhost:9292/users/${userId}/expenses`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -31,7 +28,7 @@ function App() {
       .then((res) => res.json())
       .then((addedExpense) => {
         const updatedUsers = users.map((user) => {
-          if (user.id === id){
+          if (user.id === userId){
             return {
               ...user,
               expenses: {...user.expenses, addedExpense}
@@ -40,9 +37,6 @@ function App() {
           return user
         })
         setUsers(updatedUsers)
-        // navigate('/user-expenses')
-        console.log(newExpense)
-        console.log(addedExpense)
       })
   }
 
@@ -56,7 +50,6 @@ function App() {
     })
       .then((res) => res.json())
       .then((addedUser) => {
-        console.log(addedUser)
         setUsers([...users, addedUser])
       })
   }
@@ -71,7 +64,6 @@ function App() {
           {/* <Route path='/create-user-form' element={<CreateUserForm users={users}  />} /> */}
           <Route path='/users' element={<Users users={users} submitUserForm={onSubmitCreateUserForm} />} />
           <Route path='/users/:id/*' element={<User submitExpenseForm={onSubmitCreateExpenseForm} users={users} setUsers={setUsers} />} />
-          {/* <Route path='/users/:id/edit' element={<EditUserForm users={users} setUsers={setUsers} />} /> */}
         </Routes>
     </div>
   );

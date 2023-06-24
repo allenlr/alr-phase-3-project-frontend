@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 function ExpenseForm({ submitExpenseForm, onUpdateExpense, expenseFormMode, setExpenseFormMode, expense }){
-    const { userId } = useParams();
+    const { id } = useParams();
+    console.log(id)
     const expenseCategories = [
         "Hotel",
         "Meal",
@@ -57,7 +58,7 @@ function ExpenseForm({ submitExpenseForm, onUpdateExpense, expenseFormMode, setE
     function formSubmit(e){
         e.preventDefault()
         if (expenseFormMode === 'create'){
-            submitExpenseForm(userId, newExpense)
+            submitExpenseForm(id, newExpense)
         }
         else if (expenseFormMode === 'update'){
             onUpdateExpense(newExpense)
