@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Route, Routes, useParams, Link } from 'react-router-dom'
 import Expense from './Expense'
 import ExpenseForm from './ExpenseForm'
+import EditUserForm from './EditUserForm'
 
 function User({ submitExpenseForm, users, setUsers }){
     const { id } = useParams()
@@ -16,8 +17,6 @@ function User({ submitExpenseForm, users, setUsers }){
         .then((res) => res.json())
         .then((data) => setUser(data))
     }, [id, submitExpenseForm, users])
-
-    console.log(id)
 
     function updateExpense(expense){
         fetch(`http://localhost:9292/users/${id}/expenses/${expense.id}`,{
@@ -63,6 +62,29 @@ function User({ submitExpenseForm, users, setUsers }){
           })
       }
 
+      function handleUserChanges(changedUser){
+        fetch(`http://localhost:9292/users/${id}`,{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(changedUser)
+        })
+            .then((res) => res.json())
+            .then((updatedUser) => {
+                const updatedUsers = users.map((user) => {
+                    if (user.id === changedUser.id){
+                        return updatedUser
+                    }
+                    else {
+                        return user
+                    }
+                })
+                setUsers(updatedUsers)
+                console.log(updatedUser)
+            })
+      }
+
     // which one to use? (above or below)
 
     //   function deleteExpense(expenseId, userId){
@@ -86,6 +108,23 @@ function User({ submitExpenseForm, users, setUsers }){
                 <>
                 <br></br>
                     <h2>{user.first_name}</h2>
+                    <Link 
+                        to={'edit'}
+                        style={{
+                            color: 'blue', 
+                            background: 'none', 
+                            border: 'none', 
+                            padding: 0, 
+                            font: 'inherit', 
+                            cursor: 'pointer', 
+                            textDecoration: 'underline'
+                        }}
+                    >
+                        <p>Edit User</p>
+                    </Link>
+                    <Routes>
+                        <Route path='edit' element={<EditUserForm handleUserChangeSubmit={handleUserChanges} user={user} users={users} setUsers={setUsers} />} />
+                    </Routes>
                     <hr/>
                     {expenseFormMode ? <ExpenseForm submitExpenseForm={submitExpenseForm} onUpdateExpense={updateExpense} expenseFormMode={expenseFormMode} setExpenseFormMode={setExpenseFormMode} expense={expense} /> : null }
                     <h3>Expenses:</h3>

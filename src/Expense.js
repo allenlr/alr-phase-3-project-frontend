@@ -25,29 +25,29 @@ function Expense({ expense, onDeleteExpense, setExpenseFormMode, setExpense }){
             <span style={{fontWeight: 'bold'}}>Category</span><span>: {expense.category}</span>
             <br></br>
             <button 
-            onClick={() => handleEditExpense()} 
-            style={{
-                color: 'blue', 
-                background: 'none', 
-                border: 'none', 
-                padding: 0, 
-                font: 'inherit', 
-                cursor: 'pointer', 
-                textDecoration: 'underline'}}
+                onClick={() => handleEditExpense()} 
+                style={{
+                    color: 'blue', 
+                    background: 'none', 
+                    border: 'none', 
+                    padding: 0, 
+                    font: 'inherit', 
+                    cursor: 'pointer', 
+                    textDecoration: 'underline'}}
             >
                 Edit Expense
             </button>
             <br></br>
             <button 
-            onClick={() => handleDeleteExpense()} 
-            style={{
-                color: 'blue', 
-                background: 'none', 
-                border: 'none', 
-                padding: 0, 
-                font: 'inherit', 
-                cursor: 'pointer', 
-                textDecoration: 'underline'}}
+                onClick={() => handleDeleteExpense()} 
+                style={{
+                    color: 'blue', 
+                    background: 'none', 
+                    border: 'none', 
+                    padding: 0, 
+                    font: 'inherit', 
+                    cursor: 'pointer', 
+                    textDecoration: 'underline'}}
             >
                 Delete Expense
             </button>
