@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function EditUserForm({ user, handleUserChangeSubmit }){
     const [userForm, setUserForm] = useState({
@@ -7,6 +7,15 @@ function EditUserForm({ user, handleUserChangeSubmit }){
         first_name: user.first_name,
         last_name: user.last_name
     })
+
+    useEffect(() => {
+        setUserForm({
+            username: user.username,
+            email: user.email,
+            first_name: user.first_name,
+            last_name: user.last_name
+        })
+    }, [user])
 
     function handleUserFormChanges(e){
         const keyName = e.target.name

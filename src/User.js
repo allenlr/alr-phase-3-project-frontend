@@ -23,7 +23,6 @@ function User({ submitExpenseForm, users, setUsers }){
             if (currentUser) {
                 setUser(currentUser)
                 setIsLoading(false)
-                console.log(currentUser)
             }
         }
     }, [id, submitExpenseForm, users])
@@ -66,16 +65,18 @@ function User({ submitExpenseForm, users, setUsers }){
         })
             .then((res) => res.json())
             .then((updatedUser) => {
+                console.log(updatedUser)
                 const updatedUsers = users.map((user) => {
                     if (user.id === changedUser.id){
+                        
                         return updatedUser
                     }
                     else {
                         return user
                     }
                 })
+                setUser({...updatedUser, expenses: updatedUser.expenses || []})
                 setUsers(updatedUsers)
-                console.log(updatedUser)
             })
       }
 
