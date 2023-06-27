@@ -14,7 +14,9 @@ function App() {
   useEffect(() => {
     fetch('http://localhost:9292/users')
     .then((res) => res.json())
-    .then((data) => setUsers(data))
+    .then((data) => {
+      setUsers(data)
+    })
   }, [])
   
   function onSubmitCreateExpenseForm(userId, newExpense) {

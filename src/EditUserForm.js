@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import { useParams } from 'react-router-dom'
 
 function EditUserForm({ user, handleUserChangeSubmit }){
     const [userForm, setUserForm] = useState({
@@ -25,7 +24,7 @@ function EditUserForm({ user, handleUserChangeSubmit }){
 
     return (
         <div className="input-table">
-            <h3>Enter New User Information</h3>
+            <h3>Enter User Changes</h3>
             <form onSubmit={onSubmitUserChanges}>
                 <p className="input-row">
                     <label>First Name: </label>

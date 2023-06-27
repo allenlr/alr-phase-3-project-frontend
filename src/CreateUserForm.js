@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom'
 
 function CreateUserForm({ submitUserForm }){
     // const navigate = useNavigate();
-    const [newUserData, setNewUserData] = useState({
+    const initialFormState = {
         username: '',
         email: '',
         first_name: '',
         last_name: ''
-    })
+    }
+    const [newUserData, setNewUserData] = useState(initialFormState)
     
     function handleNewUserFormChanges(e){
         const keyName = e.target.name
@@ -21,7 +22,7 @@ function CreateUserForm({ submitUserForm }){
     function onNewUserFormSubmit(e){
         e.preventDefault();
         submitUserForm(newUserData)
-        console.log(newUserData)
+        setNewUserData(initialFormState)
     }
 
     return (

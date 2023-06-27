@@ -20,6 +20,7 @@ function ExpenseForm({ submitExpenseForm, onUpdateExpense, expenseFormMode, setE
         category: expenseCategories[0]
     })
 
+
     useEffect(() => {
         if (expenseFormMode === 'create'){
             setNewExpense({
@@ -40,12 +41,6 @@ function ExpenseForm({ submitExpenseForm, onUpdateExpense, expenseFormMode, setE
             })
         }
     }, [expenseFormMode, expense])
-
-
-    // function addExpense(e){
-    //     e.preventDefault();
-    //     fetch(`http://localhost:9292/expenses/${expense.id}`)
-    // }
 
     function handleExpenseFormChanges(e){
         const keyName = e.target.name;

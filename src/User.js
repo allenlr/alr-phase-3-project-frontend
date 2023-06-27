@@ -6,20 +6,30 @@ import EditUserForm from './EditUserForm'
 
 function User({ submitExpenseForm, users, setUsers }){
     const { id } = useParams()
-    const [user, setUser] = useState(null);
-    // const [expenseFormFlag, setExpenseFormFlag] = useState(false)
+    const [user, setUser] = useState({
+        id: null,
+        first_name: '',
+        last_name: '',
+        username: '',
+        expenses: []
+    });
     const [expenseFormMode, setExpenseFormMode] = useState(null)
+    const [isLoading, setIsLoading] = useState(true)
     const [expense, setExpense] = useState(null)
-    const [expenseDeleted, setExpenseDeleted] = useState(false)
 
     useEffect(() => {
-        fetch(`http://localhost:9292/users/${id}`)
-        .then((res) => res.json())
-        .then((data) => setUser(data))
+        if (users && users.length > 0) {
+            const currentUser = users.find((u) => u.id === parseInt(id))
+            if (currentUser) {
+                setUser(currentUser)
+                setIsLoading(false)
+                console.log(currentUser)
+            }
+        }
     }, [id, submitExpenseForm, users])
 
     function updateExpense(expense){
-        fetch(`http://localhost:9292/users/${id}/expenses/${expense.id}`,{
+        fetch(`http://localhost:9292/users/${parseInt(id)}/expenses/${expense.id}`,{
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,41 +39,25 @@ function User({ submitExpenseForm, users, setUsers }){
             .then((res) => res.json())
             .then((updatedExpense) => {
                 const updatedUsers = users.map((user) => {
-                    if (id === expense.user_id){
-                        user.expenses.map((e) => {
+                    if(parseInt(id) === expense.user_id){
+                        const updatedExpenses = user.expenses.map((e) => {
                             if (e.id === expense.id) {
-                                return updatedExpense
-                            } 
-                            else return e;
-                        })
+                                return updatedExpense;
+                            } else {
+                                return e;
+                            }
+                        });
+                        return {...user, expenses: updatedExpenses};
                     } else {
-                        return user
+                        return user;
                     }
-                })
-                setUsers(updatedUsers)
+                });
+                setUsers(updatedUsers);                
             })
     }
 
-    function deleteExpense(deletedExpense){
-        fetch(`http://localhost:9292/users/${id}/expenses/${deletedExpense.id}`, {
-          method: 'DELETE'
-        })
-          .then((res) => res.json())
-          .then(() => {
-            const updatedUsers = users.map((user) => {
-                if (id === deletedExpense.user_id) {
-                    return {...user, expenses: user.expenses.filter((expense) => expense.id !== deletedExpense.id)}
-                }
-                else {
-                    return user
-                }
-            })
-            setUsers(updatedUsers)
-          })
-      }
-
       function handleUserChanges(changedUser){
-        fetch(`http://localhost:9292/users/${id}`,{
+        fetch(`http://localhost:9292/users/${parseInt(id)}`,{
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
@@ -85,26 +79,35 @@ function User({ submitExpenseForm, users, setUsers }){
             })
       }
 
-    // which one to use? (above or below)
+    
 
-    //   function deleteExpense(expenseId, userId){
-    //     fetch(`http://localhost:9292/users/${userId}/expenses/${expenseId}`, {
-    //       method: 'DELETE'
-    //     })
-    //       .then((res) => res.json())
-    //       .then(() => setExpenseDeleted(!expenseDeleted))
-    //   }
+    function deleteExpense(deletedExpense){
+        fetch(`http://localhost:9292/users/${parseInt(id)}/expenses/${deletedExpense.id}`, {
+          method: 'DELETE'
+        })
+          .then((res) => res.json())
+          .then(() => {
+            const updatedUsers = users.map((user) => {
+                if (parseInt(id) === deletedExpense.user_id) {
+                    const updatedExpenses = user.expenses.filter((expense) => expense.id !== deletedExpense.id)
+                    setUser({...user, expenses: updatedExpenses})
+                    return {...user, expenses: updatedExpenses}
+                }
+                else {
+                    return user
+                }
+            })
+            setUsers(updatedUsers)
+          })
+      }
 
-    const expenses = user ? (user.expenses.map((expense) => {
+    const expenses = user.expenses.map((expense) => {
         return <Expense key={expense.id} expense={expense} onDeleteExpense={deleteExpense} setExpense={setExpense} setExpenseFormMode={setExpenseFormMode} />
-    })) : null;
+    });
 
     return(
         <div style={{marginRight: '2rem'}}>
-
-           {user === null ? ( 
-            <p>Loading...</p>
-            ) : ( 
+            {isLoading ? 'Loading...' : 
                 <>
                 <br></br>
                     <h2>{user.first_name}</h2>
@@ -134,17 +137,8 @@ function User({ submitExpenseForm, users, setUsers }){
                     {expenses}
                     <br></br> 
                 </>
-            )}
+            }
         </div>
     )
-
-
 }
 export default User;
-
-// determine if an expense form is shown to create or update an expense
-// if create, form should be default blank, if update, form should have current expense info
-// if create or update, form should have create or update button
-// useState setUpdateFormFlag and setCreateFormFlag to determine which one
-// pass formFlags to expense for edit/update buttons to toggle
-// pass formFlags to ExpenseForm to determine which default state to show in form
