@@ -53,7 +53,7 @@ function ExpenseForm({ submitExpenseForm, onUpdateExpense, expenseFormMode, setE
     function formSubmit(e){
         e.preventDefault()
         if (expenseFormMode === 'create'){
-            submitExpenseForm(id, newExpense)
+            submitExpenseForm(parseInt(id), newExpense)
         }
         else if (expenseFormMode === 'update'){
             onUpdateExpense(newExpense)
