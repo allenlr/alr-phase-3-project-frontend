@@ -1,9 +1,7 @@
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 function NavBar(){
-
-    const navigate = useNavigate();
 
     return (
         <nav
@@ -26,12 +24,6 @@ function NavBar(){
                 <NavLink to='/users' style={{marginRight: 'right'}} >
                     Users
                 </ NavLink>
-                <div>
-                    
-                    {/* <NavLink to='/manage-account' style={{marginRight: '1rem'}}>
-                        Manage Account
-                    </NavLink> */}
-                </div>
         </nav>
     )
 }

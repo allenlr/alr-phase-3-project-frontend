@@ -63,7 +63,6 @@ function App() {
       <Header />
         <Routes>
           <Route path='/' element={<Home />} />
-          {/* <Route path='/create-user-form' element={<CreateUserForm users={users}  />} /> */}
           <Route path='/users' element={<Users users={users} submitUserForm={onSubmitCreateUserForm} />} />
           <Route path='/users/:id/*' element={<User submitExpenseForm={onSubmitCreateExpenseForm} users={users} setUsers={setUsers} />} />
         </Routes>

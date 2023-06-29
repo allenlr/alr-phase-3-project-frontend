@@ -65,7 +65,6 @@ function User({ submitExpenseForm, users, setUsers }){
         })
             .then((res) => res.json())
             .then((updatedUser) => {
-                console.log(updatedUser)
                 const updatedUsers = users.map((user) => {
                     if (user.id === changedUser.id){
                         
@@ -78,6 +77,9 @@ function User({ submitExpenseForm, users, setUsers }){
                 setUser({...updatedUser, expenses: updatedUser.expenses || []})
                 setUsers(updatedUsers)
             })
+            .then(() => fetch('http://localhost:9292/users'))
+            .then((res) => res.json())
+            .then((usersData) => setUsers(usersData))
       }
 
     
