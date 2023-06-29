@@ -92,7 +92,8 @@ function User({ submitExpenseForm, users, setUsers }){
           .then(() => {
             const updatedUsers = users.map((user) => {
                 if (parseInt(id) === deletedExpense.user_id) {
-                    const updatedExpenses = user.expenses.filter((expense) => expense.id !== deletedExpense.id)
+                    console.log(user.expenses)
+                    const updatedExpenses = user.expenses ? user.expenses.filter((expense) => expense.id !== deletedExpense.id) : [];
                     setUser({...user, expenses: updatedExpenses})
                     return {...user, expenses: updatedExpenses}
                 }
@@ -104,9 +105,9 @@ function User({ submitExpenseForm, users, setUsers }){
           })
       }
 
-    const expenses = user.expenses.map((expense) => {
+    const expenses = user.expenses ? user.expenses.map((expense) => {
         return <Expense key={expense.id} expense={expense} onDeleteExpense={deleteExpense} setExpense={setExpense} setExpenseFormMode={setExpenseFormMode} />
-    });
+    }) : [];
 
     return(
         <div style={{marginRight: '2rem'}}>
