@@ -92,7 +92,6 @@ function User({ submitExpenseForm, users, setUsers }){
           .then(() => {
             const updatedUsers = users.map((user) => {
                 if (parseInt(id) === deletedExpense.user_id) {
-                    console.log(user.expenses)
                     const updatedExpenses = user.expenses ? user.expenses.filter((expense) => expense.id !== deletedExpense.id) : [];
                     setUser({...user, expenses: updatedExpenses})
                     return {...user, expenses: updatedExpenses}
