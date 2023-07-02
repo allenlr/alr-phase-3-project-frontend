@@ -33,7 +33,7 @@ function App() {
           if (user.id === userId){
             return {
               ...user,
-              expenses: [...user.expenses, addedExpense]
+              expenses: [...(user.expenses || []), addedExpense]
             }
           }
           return user
