@@ -3,6 +3,7 @@ import { Route, Routes, useParams, Link } from 'react-router-dom'
 import Expense from './Expense'
 import ExpenseForm from './ExpenseForm'
 import EditUserForm from './EditUserForm'
+import Button from '@mui/material/Button';
 
 function User({ submitExpenseForm, users, setUsers }){
     const { id } = useParams()
@@ -13,6 +14,8 @@ function User({ submitExpenseForm, users, setUsers }){
         username: '',
         expenses: []
     });
+
+    console.log(user)
     const [expenseFormMode, setExpenseFormMode] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [expense, setExpense] = useState(null)
@@ -134,7 +137,7 @@ function User({ submitExpenseForm, users, setUsers }){
                     <hr/>
                     {expenseFormMode ? <ExpenseForm submitExpenseForm={submitExpenseForm} onUpdateExpense={updateExpense} expenseFormMode={expenseFormMode} setExpenseFormMode={setExpenseFormMode} expense={expense} /> : null }
                     <h3>Expenses:</h3>
-                    <button onClick={() => setExpenseFormMode('create')}>Add Expense</button>
+                    <Button varian="contained" color="primary" onClick={() => setExpenseFormMode('create')}>Add Expense</Button>
                     <br></br>
                     <br></br>
                     {expenses}

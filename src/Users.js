@@ -4,7 +4,7 @@ import CreateUserForm from './CreateUserForm'
 
 const Users = ({ users, submitUserForm }) => {
     const [userFormFlag, setUserFormFlag] = useState(false)
-
+    console.log(users)
     const usersList = users.map((user) => {
         return <UserLink key={user.id} user={user} />
     })

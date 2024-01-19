@@ -6,9 +6,29 @@ import NavBar from './NavBar'
 import Header from './Header'
 import Users from './Users'
 import User from './User'
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function App() {
   const [users, setUsers] = useState([]);
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#556cd6',
+      },
+      secondary: {
+        main: '#19857b',
+      },
+      success: {
+        main: '#4caf50',
+      },
+      info: {
+        main: '#2196f3',
+      },
+      customColor: {
+        main: '#abcdef',
+      },
+    },
+  });
   
 
   useEffect(() => {
@@ -58,15 +78,17 @@ function App() {
 
 
   return (
-    <div className="App">
-      <NavBar />
-      <Header />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/users' element={<Users users={users} submitUserForm={onSubmitCreateUserForm} />} />
-          <Route path='/users/:id/*' element={<User submitExpenseForm={onSubmitCreateExpenseForm} users={users} setUsers={setUsers} />} />
-        </Routes>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <NavBar />
+        <Header />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/users' element={<Users users={users} submitUserForm={onSubmitCreateUserForm} />} />
+            <Route path='/users/:id/*' element={<User submitExpenseForm={onSubmitCreateExpenseForm} users={users} setUsers={setUsers} />} />
+          </Routes>
+      </div>
+    </ThemeProvider>
   );
 }
 
