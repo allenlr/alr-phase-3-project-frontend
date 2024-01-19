@@ -19,6 +19,7 @@ function User({ submitExpenseForm, users, setUsers }){
     const [expenseFormMode, setExpenseFormMode] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [expense, setExpense] = useState(null)
+    const [editUser, setEditUser] = useState(false)
 
     useEffect(() => {
         if (users && users.length > 0) {
@@ -123,12 +124,11 @@ function User({ submitExpenseForm, users, setUsers }){
                         variant="contained"
                         color="primary"
                         style={{marginBottom:'5px'}}
+                        onClick={() => setEditUser(!editUser)}
                     >
                     Edit User
                     </Button>
-                    <Routes>
-                        <Route path='edit' element={<EditUserForm handleUserChangeSubmit={handleUserChanges} user={user} users={users} setUsers={setUsers} />} />
-                    </Routes>
+                    {editUser ? <EditUserForm handleUserChangeSubmit={handleUserChanges} user={user} users={users} setUsers={setUsers} /> : null}
                     <hr/>
                     {expenseFormMode ? <ExpenseForm submitExpenseForm={submitExpenseForm} onUpdateExpense={updateExpense} expenseFormMode={expenseFormMode} setExpenseFormMode={setExpenseFormMode} expense={expense} /> : null }
                     <h3>Expenses:</h3>
