@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import { useNavigate } from 'react-router-dom'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 function CreateUserForm({ submitUserForm }){
-    // const navigate = useNavigate();
     const initialFormState = {
         username: '',
         email: '',
@@ -29,49 +30,47 @@ function CreateUserForm({ submitUserForm }){
         <div className="input-table">
             <h3>Enter New User Information</h3>
             <form onSubmit={ onNewUserFormSubmit }>
-                <p className="input-row">
-                    <label>First Name: </label>
-                    <input
-                        type='text'
-                        value={newUserData.first_name}
-                        name='first_name'
-                        onChange={handleNewUserFormChanges}
-                        >
-                    </input>
-                </p>
-                <p className="input-row">
-                    <label>Last Name: </label>
-                    <input
-                        type='text'
-                        value={newUserData.last_name}
-                        name='last_name'
-                        onChange={handleNewUserFormChanges}
-                        >
-                    </input>
-                </p>
-                <p className="input-row">
-                    <label>Username: </label>
-                    <input
-                        type='text'
-                        value={newUserData.username}
-                        name='username'
-                        onChange={handleNewUserFormChanges}
-                        >
-                    </input>
-                </p>
-                <p className="input-row">
-                    <label>Email: </label>
-                    <input 
-                        type='text'
-                        value={newUserData.email}
-                        name='email'
-                        onChange={handleNewUserFormChanges}
-                        >
-                    </input>
-                </p>
-                <p>
-                    <button type='submit'>Create User</button>
-                </p>
+                <TextField
+                    label="First Name"
+                    type="text"
+                    value={newUserData.first_name}
+                    name="first_name"
+                    onChange={handleNewUserFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <TextField
+                    label="Last Name"
+                    type="text"
+                    value={newUserData.last_name}
+                    name="last_name"
+                    onChange={handleNewUserFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <TextField
+                    label="Username"
+                    type="text"
+                    value={newUserData.username}
+                    name="username"
+                    onChange={handleNewUserFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <TextField
+                    label="Email"
+                    type="text"
+                    value={newUserData.email}
+                    name="email"
+                    onChange={handleNewUserFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <Button color="primary" variant="contained" type='submit'>Create User</Button>
             </form>
         </div>
     )
