@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
 
 function ExpenseForm({ submitExpenseForm, onUpdateExpense, expenseFormMode, setExpenseFormMode, expense }){
     const { id } = useParams();
-    console.log(id)
     const expenseCategories = [
         "Hotel",
         "Meal",
@@ -65,49 +67,59 @@ function ExpenseForm({ submitExpenseForm, onUpdateExpense, expenseFormMode, setE
         <div className="input-table">
             <h3>{expenseFormMode === 'create' ? 'Enter Expense' : 'Enter New Expense Information'}</h3>
             <form onSubmit={formSubmit}>
-                <p className="input-row">
-                    <label>Expense Name: </label>
-                    <input
-                        type='text'
-                        value={newExpense.name}
-                        name='name'
-                        onChange={handleExpenseFormChanges}
-                        >
-                    </input>
-                </p>
-                <p className="input-row">
-                    <label>Amount: </label>
-                    <input
-                        type='text'
-                        value={newExpense.amount}
-                        name='amount'
-                        onChange={handleExpenseFormChanges}
-                        >
-                    </input>
-                </p>
-                <p className="input-row">
-                    <label>Date Incurred: </label>
-                    <input
-                        type='date'
-                        value={newExpense.date_incurred}
-                        name='date_incurred'
-                        onChange={handleExpenseFormChanges}
-                        >
-                    </input>
-                </p>
-                <p className="input-row">
-                    <label>Category: </label>
-                    <select onChange={handleExpenseFormChanges} value={newExpense.category} name='category'>
-                        {expenseCategories.map((category) => {
-                            return (
-                                <option key={category}>{category}</option>
-                            )
-                        })}
-                    </select>
-                </p>
-                <p>
-                    <button type='submit'>{expenseFormMode === 'create' ? 'Create Expense' : 'Update Expense'}</button>
-                </p>
+                <TextField
+                    label="Expense Name"
+                    type="text"
+                    value={newExpense.name}
+                    name="name"
+                    onChange={handleExpenseFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                {/* validate amount to ensure numericality on backend */}
+                <TextField
+                    label="Amount"
+                    type="text"
+                    value={newExpense.amount}
+                    name="amount"
+                    onChange={handleExpenseFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <TextField
+                    // label="Date Incurred"
+                    type="date"
+                    value={newExpense.date_incurred}
+                    name="date_incurred"
+                    onChange={handleExpenseFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <TextField
+                    label="Category"
+                    select
+                    value={newExpense.category}
+                    name="category"
+                    onChange={handleExpenseFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                    InputProps={{
+                        style: { textAlign: 'left' }
+                    }}
+                >
+                    {expenseCategories.map((category) => (
+                        <MenuItem key={category} value={category}>
+                            {category}
+                        </MenuItem>
+                    ))}
+                </TextField>
+                <Button variant="contained" color="primary" type="submit">{expenseFormMode === 'create' ? 'Create Expense' : 'Update Expense'} </Button>
+                <br/>
+                <Button color="primary" onClick={() => setExpenseFormMode(null)}>Cancel</Button>
             </form>
         </div>
     )
