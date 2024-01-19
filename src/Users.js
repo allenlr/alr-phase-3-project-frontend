@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import UserLink from './UserLink'
 import CreateUserForm from './CreateUserForm'
+import Button from '@mui/material/Button';
 
 const Users = ({ users, submitUserForm }) => {
     const [userFormFlag, setUserFormFlag] = useState(false)
@@ -11,7 +12,7 @@ const Users = ({ users, submitUserForm }) => {
 
     return (
         <div style={{marginRight: '5rem'}}>
-            <button onClick={() => setUserFormFlag(!userFormFlag)}>Create New User</button>
+            <Button color="primary" variant="contained" onClick={() => setUserFormFlag(!userFormFlag)}>Create New User</Button>
             {userFormFlag ? <CreateUserForm submitUserForm={submitUserForm} /> : null}
             <ul style={{marginRight: '2rem'}}>{usersList}</ul>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 function EditUserForm({ user, handleUserChangeSubmit }){
     const [userForm, setUserForm] = useState({
@@ -35,50 +36,52 @@ function EditUserForm({ user, handleUserChangeSubmit }){
 
     return (
         <div className="input-table">
-            <h3>Enter User Changes</h3>
-            <form onSubmit={onSubmitUserChanges}>
-                <TextField
-                    label="First Name"
-                    type="text"
-                    value={userForm.first_name}
-                    name="first_name"
-                    onChange={handleUserFormChanges}
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                />
-                <TextField
-                    label="Last Name"
-                    type="text"
-                    value={userForm.last_name}
-                    name="last_name"
-                    onChange={handleUserFormChanges}
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                />
-                <TextField
-                    label="Username"
-                    type="text"
-                    value={userForm.username}
-                    name="username"
-                    onChange={handleUserFormChanges}
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                />
-                <TextField
-                    label="Email"
-                    type="text"
-                    value={userForm.email}
-                    name="email"
-                    onChange={handleUserFormChanges}
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                />
-                <Button variant="contained" color="primary" type='submit'>Submit Changes</Button>
-            </form>
+            <Box p={3} >
+                <h3>Enter User Changes</h3>
+                <form onSubmit={onSubmitUserChanges}>
+                    <TextField
+                        label="First Name"
+                        type="text"
+                        value={userForm.first_name}
+                        name="first_name"
+                        onChange={handleUserFormChanges}
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                    />
+                    <TextField
+                        label="Last Name"
+                        type="text"
+                        value={userForm.last_name}
+                        name="last_name"
+                        onChange={handleUserFormChanges}
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                    />
+                    <TextField
+                        label="Username"
+                        type="text"
+                        value={userForm.username}
+                        name="username"
+                        onChange={handleUserFormChanges}
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                    />
+                    <TextField
+                        label="Email"
+                        type="text"
+                        value={userForm.email}
+                        name="email"
+                        onChange={handleUserFormChanges}
+                        variant="outlined"
+                        fullWidth
+                        margin="normal"
+                    />
+                    <Button variant="contained" color="primary" type='submit'>Submit Changes</Button>
+                </form>
+            </Box>
         </div>
     )
 }

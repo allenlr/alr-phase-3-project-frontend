@@ -117,7 +117,7 @@ function User({ submitExpenseForm, users, setUsers }){
             {isLoading ? 'Loading...' : 
                 <>
                 <br></br>
-                    <h2>{user.first_name}</h2>
+                    <h2>{user.first_name} {user.last_name}</h2>
                     <Button 
                         component={Link}
                         to={'edit'}
