@@ -1,8 +1,7 @@
 import React from 'react'
+import Button from '@mui/material/Button';
 
 function Expense({ expense, onDeleteExpense, setExpenseFormMode, setExpense }){
-    // console.log(expense)
-
 
     function handleDeleteExpense(){
         onDeleteExpense(expense)
@@ -24,33 +23,30 @@ function Expense({ expense, onDeleteExpense, setExpenseFormMode, setExpense }){
             <br></br>
             <span style={{fontWeight: 'bold'}}>Category</span><span>: {expense.category}</span>
             <br></br>
-            <button 
+            <Button 
+                color="secondary"
+                variant="outlined"
                 onClick={() => handleEditExpense()} 
                 style={{
-                    color: 'blue', 
-                    background: 'none', 
+                    marginTop: '5px',
                     border: 'none', 
                     padding: 0, 
-                    font: 'inherit', 
-                    cursor: 'pointer', 
-                    textDecoration: 'underline'}}
+                }}
             >
                 Edit Expense
-            </button>
+            </Button>
             <br></br>
-            <button 
+            <Button 
+                color="secondary"
+                variant="outlined"
                 onClick={() => handleDeleteExpense()} 
                 style={{
-                    color: 'blue', 
-                    background: 'none', 
                     border: 'none', 
                     padding: 0, 
-                    font: 'inherit', 
-                    cursor: 'pointer', 
-                    textDecoration: 'underline'}}
+                }}
             >
                 Delete Expense
-            </button>
+            </Button>
             <br></br>
             <br></br>
             <br></br>

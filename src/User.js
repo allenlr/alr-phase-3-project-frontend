@@ -5,6 +5,7 @@ import ExpenseForm from './ExpenseForm'
 import EditUserForm from './EditUserForm'
 import Button from '@mui/material/Button';
 
+
 function User({ submitExpenseForm, users, setUsers }){
     const { id } = useParams()
     const [user, setUser] = useState({
@@ -15,7 +16,6 @@ function User({ submitExpenseForm, users, setUsers }){
         expenses: []
     });
 
-    console.log(user)
     const [expenseFormMode, setExpenseFormMode] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [expense, setExpense] = useState(null)
@@ -117,27 +117,22 @@ function User({ submitExpenseForm, users, setUsers }){
                 <>
                 <br></br>
                     <h2>{user.first_name}</h2>
-                    <Link 
+                    <Button 
+                        component={Link}
                         to={'edit'}
-                        style={{
-                            color: 'blue', 
-                            background: 'none', 
-                            border: 'none', 
-                            padding: 0, 
-                            font: 'inherit', 
-                            cursor: 'pointer', 
-                            textDecoration: 'underline'
-                        }}
+                        variant="contained"
+                        color="primary"
+                        style={{marginBottom:'5px'}}
                     >
-                        <p>Edit User</p>
-                    </Link>
+                    Edit User
+                    </Button>
                     <Routes>
                         <Route path='edit' element={<EditUserForm handleUserChangeSubmit={handleUserChanges} user={user} users={users} setUsers={setUsers} />} />
                     </Routes>
                     <hr/>
                     {expenseFormMode ? <ExpenseForm submitExpenseForm={submitExpenseForm} onUpdateExpense={updateExpense} expenseFormMode={expenseFormMode} setExpenseFormMode={setExpenseFormMode} expense={expense} /> : null }
                     <h3>Expenses:</h3>
-                    <Button varian="contained" color="primary" onClick={() => setExpenseFormMode('create')}>Add Expense</Button>
+                    <Button variant="contained" color="secondary" onClick={() => setExpenseFormMode('create')}>Add Expense</Button>
                     <br></br>
                     <br></br>
                     {expenses}
