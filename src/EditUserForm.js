@@ -37,49 +37,47 @@ function EditUserForm({ user, handleUserChangeSubmit }){
         <div className="input-table">
             <h3>Enter User Changes</h3>
             <form onSubmit={onSubmitUserChanges}>
-                <p className="input-row">
-                    <label>First Name: </label>
-                    <input
-                        type='text'
-                        value={userForm.first_name}
-                        name='first_name'
-                        onChange={handleUserFormChanges}
-                        >
-                    </input>
-                </p>
-                <p className="input-row">
-                    <label>Last Name: </label>
-                    <input
-                        type='text'
-                        value={userForm.last_name}
-                        name='last_name'
-                        onChange={handleUserFormChanges}
-                        >
-                    </input>
-                </p>
-                <p className="input-row">
-                    <label>Username: </label>
-                    <input
-                        type='text'
-                        value={userForm.username}
-                        name='username'
-                        onChange={handleUserFormChanges}
-                        >
-                    </input>
-                </p>
-                <p className="input-row">
-                    <label>Email: </label>
-                    <input 
-                        type='text'
-                        value={userForm.email}
-                        name='email'
-                        onChange={handleUserFormChanges}
-                        >
-                    </input>
-                </p>
-                <p>
-                    <button type='submit'>Submit Changes</button>
-                </p>
+                <TextField
+                    label="First Name"
+                    type="text"
+                    value={userForm.first_name}
+                    name="first_name"
+                    onChange={handleUserFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <TextField
+                    label="Last Name"
+                    type="text"
+                    value={userForm.last_name}
+                    name="last_name"
+                    onChange={handleUserFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <TextField
+                    label="Username"
+                    type="text"
+                    value={userForm.username}
+                    name="username"
+                    onChange={handleUserFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <TextField
+                    label="Email"
+                    type="text"
+                    value={userForm.email}
+                    name="email"
+                    onChange={handleUserFormChanges}
+                    variant="outlined"
+                    fullWidth
+                    margin="normal"
+                />
+                <Button variant="contained" color="primary" type='submit'>Submit Changes</Button>
             </form>
         </div>
     )
