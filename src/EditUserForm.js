@@ -3,7 +3,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-function EditUserForm({ user, handleUserChangeSubmit }){
+
+function EditUserForm({ user, handleUserChangeSubmit, deleteUser }){
     const [userForm, setUserForm] = useState({
         username: user.username,
         email: user.email,
@@ -82,6 +83,9 @@ function EditUserForm({ user, handleUserChangeSubmit }){
                     <Button variant="contained" color="primary" type='submit'>Submit Changes</Button>
                 </form>
             </Box>
+            <Button onClick={() => deleteUser(user.id)}>
+                Delete User
+            </Button>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Route, Routes, useParams, Link } from 'react-router-dom'
+import { Route, Routes, useParams, Link, useNavigate } from 'react-router-dom'
 import Expense from './Expense'
 import ExpenseForm from './ExpenseForm'
 import EditUserForm from './EditUserForm'
@@ -20,6 +20,7 @@ function User({ submitExpenseForm, users, setUsers }){
     const [isLoading, setIsLoading] = useState(true)
     const [expense, setExpense] = useState(null)
     const [editUser, setEditUser] = useState(false)
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (users && users.length > 0) {
@@ -86,6 +87,17 @@ function User({ submitExpenseForm, users, setUsers }){
             .then((usersData) => setUsers(usersData))
       }
 
+    function deleteUser(deletedUserId){
+        fetch(`http://localhost:9292/users/${deletedUserId}`, {
+            method: 'DELETE'
+        })
+        .then((res) => res.json())
+        .then(() => {
+            const updatedUsers = users.filter((user) => user.id !== deletedUserId)
+            setUsers(updatedUsers)
+        })
+        navigate('/users')
+    }
     
 
     function deleteExpense(deletedExpense){
@@ -119,8 +131,6 @@ function User({ submitExpenseForm, users, setUsers }){
                 <br></br>
                     <h2>{user.first_name} {user.last_name}</h2>
                     <Button 
-                        component={Link}
-                        to={'edit'}
                         variant="contained"
                         color="primary"
                         style={{marginBottom:'5px'}}
@@ -128,7 +138,8 @@ function User({ submitExpenseForm, users, setUsers }){
                     >
                     Edit User
                     </Button>
-                    {editUser ? <EditUserForm handleUserChangeSubmit={handleUserChanges} user={user} users={users} setUsers={setUsers} /> : null}
+                    <br/>
+                    {editUser ? <EditUserForm handleUserChangeSubmit={handleUserChanges} user={user} /*users={users} setUsers={setUsers}*/ deleteUser={deleteUser} /> : null}
                     <hr/>
                     {expenseFormMode ? <ExpenseForm submitExpenseForm={submitExpenseForm} onUpdateExpense={updateExpense} expenseFormMode={expenseFormMode} setExpenseFormMode={setExpenseFormMode} expense={expense} /> : null }
                     <h3>Expenses:</h3>
