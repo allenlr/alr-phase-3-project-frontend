@@ -27,6 +27,9 @@ function App() {
       customColor: {
         main: '#abcdef',
       },
+      white: {
+        main: '#ffffff'
+      }
     },
   });
   

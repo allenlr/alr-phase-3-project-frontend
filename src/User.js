@@ -85,6 +85,7 @@ function User({ submitExpenseForm, users, setUsers }){
             .then(() => fetch('http://localhost:9292/users'))
             .then((res) => res.json())
             .then((usersData) => setUsers(usersData))
+            setEditUser(false)
       }
 
     function deleteUser(deletedUserId){
@@ -129,7 +130,7 @@ function User({ submitExpenseForm, users, setUsers }){
             {isLoading ? 'Loading...' : 
                 <>
                 <br></br>
-                    <h2>{user.first_name} {user.last_name}</h2>
+                    <h2>{user.first_name} {user.last_name} ({user.username})</h2>
                     <Button 
                         variant="contained"
                         color="primary"
