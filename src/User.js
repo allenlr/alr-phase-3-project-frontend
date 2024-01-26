@@ -102,6 +102,7 @@ function User({ submitExpenseForm, users, setUsers }){
     
 
     function deleteExpense(deletedExpense){
+        console.log(deletedExpense)
         fetch(`http://localhost:9292/users/${parseInt(id)}/expenses/${deletedExpense.id}`, {
           method: 'DELETE'
         })

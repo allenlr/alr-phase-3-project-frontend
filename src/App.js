@@ -7,9 +7,16 @@ import Header from './Header'
 import Users from './Users'
 import User from './User'
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from '@mui/material/Button';
 
 function App() {
   const [users, setUsers] = useState([]);
+  const [error, setError] = useState(null);
   const theme = createTheme({
     palette: {
       primary: {
@@ -50,8 +57,17 @@ function App() {
       },
       body: JSON.stringify(newExpense),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          return res.json().then(body => {
+            const error = body.error || "Unknown error occurred";
+            throw new Error(error);
+          })
+        }
+        return res.json();
+      })
       .then((addedExpense) => {
+        console.log(addedExpense)
         const updatedUsers = users.map((user) => {
           if (user.id === userId){
             return {
@@ -62,6 +78,10 @@ function App() {
           return user
         })
         setUsers(updatedUsers)
+      })
+      .catch(error => {
+        setError(error.message)
+        console.log(error)
       })
   }
 
@@ -85,11 +105,29 @@ function App() {
       <div className="App">
         <NavBar />
         <Header />
+        
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/users' element={<Users users={users} submitUserForm={onSubmitCreateUserForm} />} />
             <Route path='/users/:id/*' element={<User submitExpenseForm={onSubmitCreateExpenseForm} users={users} setUsers={setUsers} />} />
           </Routes>
+
+          <Dialog
+          open={Boolean(error)}
+          onClose={() => setError(null)}
+          aria-labelledby="error-dialog-title"
+          aria-describedby="error-dialog-description"
+        >
+          <DialogTitle id="error-dialog-title">Error</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="error-dialog-description">
+              {error}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setError(null)}>Close</Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </ThemeProvider>
   );

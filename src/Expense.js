@@ -1,19 +1,8 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableContainer, TableRow, Paper} from '@mui/material';
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-// import { makeStyles } from '@mui/styles';
-
-// const useStyles = makeStyles({
-//     expense: {
-//         margin: '0 auto',
-//         maxWidth: '600px',
-//     }
-// })
 
 function Expense({ expense, onDeleteExpense, setExpenseFormMode, setExpense }){
-
-    // const classes = useStyles();
 
     function handleDeleteExpense(){
         onDeleteExpense(expense)
